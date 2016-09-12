@@ -3,9 +3,9 @@
 namespace EoraMarketplace.Data.Domain.Users
 {
     /// <summary>
-    ///     User entity for Asp.NET identity
+    ///     Represents what a roles have user
     /// </summary>
-    public class User : IdentityUser<int, UserLogins, UserRoles, UserClaims>
+    public class UserRoles : IdentityUserRole<int>
     {
     }
 }

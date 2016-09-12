@@ -4,7 +4,7 @@ using System.Data.Entity;
 
 namespace EoraMarketplace.Data
 {
-    public class EoraDbContext : IdentityDbContext<User, Role, int, IdentityUserLogin<int>, IdentityUserRole<int>, IdentityUserClaim<int>>
+    public class EoraDbContext : IdentityDbContext<User, Role, int, UserLogins, UserRoles, UserClaims>
     {
         public EoraDbContext()
             : base("DevConnection")

@@ -59,6 +59,8 @@
   <ItemGroup>
     <Compile Include="Domain\Users\Role.cs" />
     <Compile Include="Domain\Users\User.cs" />
+    <Compile Include="Domain\Users\UserClaims.cs" />
+    <Compile Include="Domain\Users\UserLogins.cs" />
     <Compile Include="Domain\Users\UserRoles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

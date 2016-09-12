@@ -2,7 +2,10 @@
 
 namespace EoraMarketplace.Data.Domain.Users
 {
-    public class Role : IdentityRole<int, IdentityUserRole<int>>
+    /// <summary>
+    ///     Role entity for Asp.NET identity users
+    /// </summary>
+    public class Role : IdentityRole<int, UserRoles>
     {
         public string Description { get; set; }
     }

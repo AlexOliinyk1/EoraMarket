@@ -14,7 +14,7 @@ namespace EoraMarketplace.Injector.Web
         protected internal override void RegisterTypes(IUnityContainer container)
         {
             container.RegisterType<DbContext, EoraDbContext>();
-            container.RegisterType<IdentityDbContext<User, Role, int, IdentityUserLogin<int>, IdentityUserRole<int>, IdentityUserClaim<int>>, EoraDbContext>();
+            container.RegisterType<IdentityDbContext<User, Role, int, UserLogins, UserRoles, UserClaims>, EoraDbContext>();
 
             container.RegisterType<IRepository<User>, Repository<User>>();
             container.RegisterType<IRepository<Role>, Repository<Role>>();
