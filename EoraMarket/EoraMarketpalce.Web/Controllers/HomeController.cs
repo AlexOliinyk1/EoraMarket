@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using EoraMarketpalce.Web.Controllers.Base;
 using System.Web.Mvc;
 
 namespace EoraMarketpalce.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : AppController
     {
         public ActionResult Index()
         {
             return View();
         }
 
+        [Authorize]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

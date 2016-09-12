@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EoraMarketplace.Services", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EoraMarketplace.DataAccess", "EoraMarketplace.DataAccess\EoraMarketplace.DataAccess.csproj", "{15636A24-85CA-41B2-9840-EFC6FAA5401E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EoraMarketplace.Injector", "EoraMarketplace.Injector\EoraMarketplace.Injector.csproj", "{D637DA9D-225E-470B-BCE2-13247B64EBE3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{15636A24-85CA-41B2-9840-EFC6FAA5401E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15636A24-85CA-41B2-9840-EFC6FAA5401E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15636A24-85CA-41B2-9840-EFC6FAA5401E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D637DA9D-225E-470B-BCE2-13247B64EBE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D637DA9D-225E-470B-BCE2-13247B64EBE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D637DA9D-225E-470B-BCE2-13247B64EBE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D637DA9D-225E-470B-BCE2-13247B64EBE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

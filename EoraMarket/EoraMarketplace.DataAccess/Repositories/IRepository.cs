@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EoraMarket.DataAccess.Repositories
 {
-    interface IRepository<TEntity> where TEntity : class
+    public interface IRepository<TEntity> where TEntity : class
     {
         /// <summary>
         /// Get entity by identifier

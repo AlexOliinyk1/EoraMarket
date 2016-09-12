@@ -1,11 +1,10 @@
-﻿using System.Security.Claims;
-using System.Threading.Tasks;
-using EoraMarketplace.Data.Domain.Users;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using EoraMarketplace.Data.Domain.Users;
+using Microsoft.Owin;
 
-namespace EoraMarketpalce.Web.Models.Identity
+namespace EoraMarketpalce.Web.Common.Identity
 {
     public class EoraSignInManager : SignInManager<User, int>
     {
@@ -13,6 +12,11 @@ namespace EoraMarketpalce.Web.Models.Identity
             : base(userManager, authenticationManager)
         {
             this.AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie;
+        }
+
+        public static EoraSignInManager Create(IdentityFactoryOptions<EoraSignInManager> options, IOwinContext context)
+        {
+            return new EoraSignInManager(context.GetUserManager<EoraUserManager>(), context.Authentication);
         }
     }
 }

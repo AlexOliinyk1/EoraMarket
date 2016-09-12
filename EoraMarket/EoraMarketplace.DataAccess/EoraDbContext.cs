@@ -4,8 +4,12 @@ using System.Data.Entity;
 
 namespace EoraMarketplace.Data
 {
-    class EoraDbContext : IdentityDbContext<User, Role, int, IdentityUserLogin<int>, IdentityUserRole<int>, IdentityUserClaim<int>>
+    public class EoraDbContext : IdentityDbContext<User, Role, int, IdentityUserLogin<int>, IdentityUserRole<int>, IdentityUserClaim<int>>
     {
+        public EoraDbContext()
+            : base("DevConnection")
+        { }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
