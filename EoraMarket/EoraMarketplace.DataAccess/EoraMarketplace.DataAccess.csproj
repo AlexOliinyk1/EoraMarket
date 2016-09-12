@@ -58,12 +58,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EoraDbContext.cs" />
+    <Compile Include="Migrations\201609121719481_Init.cs" />
+    <Compile Include="Migrations\201609121719481_Init.Designer.cs">
+      <DependentUpon>201609121719481_Init.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201609121719481_Init.resx">
+      <DependentUpon>201609121719481_Init.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EoraMarketplace.Data\EoraMarketplace.Data.csproj">
       <Project>{a2ec559c-1b0e-42da-8e87-8485b9efb5fa}</Project>

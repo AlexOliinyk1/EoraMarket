@@ -16,9 +16,9 @@ namespace EoraMarketplace.Data
 
             modelBuilder.Entity<User>().ToTable("Users");
             modelBuilder.Entity<Role>().ToTable("Roles");
-            modelBuilder.Entity<IdentityUserRole<int>>().ToTable("UserRoles");
-            modelBuilder.Entity<IdentityUserLogin<int>>().ToTable("UserLogins");
-            modelBuilder.Entity<IdentityUserClaim<int>>().ToTable("UserClaims");
+            modelBuilder.Entity<UserRoles>().ToTable("UserRoles");
+            modelBuilder.Entity<UserLogins>().ToTable("UserLogins");
+            modelBuilder.Entity<UserClaims>().ToTable("UserClaims");
         }
     }
 }
