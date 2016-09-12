@@ -1,9 +1,12 @@
 ﻿using EoraMarketpalce.Web.Common.Identity;
 using EoraMarketpalce.Web.Controllers.Base;
 using EoraMarketpalce.Web.Models.Auth;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using Microsoft.Practices.Unity;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 
 namespace EoraMarketpalce.Web.Controllers
@@ -11,9 +14,17 @@ namespace EoraMarketpalce.Web.Controllers
     [AllowAnonymous]
     public class SignInController : AppController
     {
-        public EoraSignInManager SignInManager { get; set; }
+        /// <summary>
+        ///     Get instance of AuthenticationManager by Owin context
+        /// </summary>
+        private IAuthenticationManager AuthenticationManager
+        {
+            get { return HttpContext.GetOwinContext().Authentication; }
+        }
 
-        public EoraUserManager UserManager { get; set; }
+        public EoraSignInManager SignInManager { get; private set; }
+
+        public EoraUserManager UserManager { get; private set; }
 
         /// <summary>
         ///     Ctor.
@@ -26,12 +37,24 @@ namespace EoraMarketpalce.Web.Controllers
             SignInManager = signInManager;
         }
 
+        /// <summary>
+        ///     Get view to login user
+        /// </summary>
+        /// <param name="returnUrl">Url of location where user was before auth request</param>
+        /// <returns></returns>
         [HttpGet]
-        public ViewResult Index()
+        public ViewResult Index(string returnUrl)
         {
+            ViewBag.ReturnUrl = returnUrl;
             return View();
-        } 
+        }
 
+        /// <summary>
+        ///     Process login request
+        /// </summary>
+        /// <param name="login">Login credentials</param>
+        /// <param name="returnUrl">Url of location where user was before auth request</param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult> Index(SignInViewModel login, string returnUrl)
         {
@@ -54,6 +77,17 @@ namespace EoraMarketpalce.Web.Controllers
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(login);
             }
+        }
+
+        /// <summary>
+        ///     Process log out request
+        /// </summary>
+        /// <returns></returns>
+        public async Task<ActionResult> SignOut()
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

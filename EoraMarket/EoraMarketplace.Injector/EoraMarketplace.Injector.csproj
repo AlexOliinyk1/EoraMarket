@@ -103,7 +103,6 @@
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Web\OwinBootstrapper.cs" />
     <Compile Include="Web\WebBootstrapper.cs" />
   </ItemGroup>
   <ItemGroup>

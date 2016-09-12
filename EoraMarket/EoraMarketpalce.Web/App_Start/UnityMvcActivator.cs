@@ -1,6 +1,6 @@
-using System.Linq;
 using System.Web.Mvc;
 using Microsoft.Practices.Unity.Mvc;
+using Microsoft.Practices.Unity;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(EoraMarketpalce.Web.App_Start.UnityWebActivator), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(EoraMarketpalce.Web.App_Start.UnityWebActivator), "Shutdown")]
@@ -11,23 +11,18 @@ namespace EoraMarketpalce.Web.App_Start
     public static class UnityWebActivator
     {
         /// <summary>Integrates Unity when the application starts.</summary>
-        public static void Start() 
+        public static void Start()
         {
-            var container = UnityConfig.GetConfiguredContainer();
-
-            FilterProviders.Providers.Remove(FilterProviders.Providers.OfType<FilterAttributeFilterProvider>().First());
-            FilterProviders.Providers.Add(new UnityFilterAttributeFilterProvider(container));
+            IUnityContainer container = UnityConfig.ConfiguredContainer;
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
-
-            // TODO: Uncomment if you want to use PerRequestLifetimeManager
-            // Microsoft.Web.Infrastructure.DynamicModuleHelper.DynamicModuleUtility.RegisterModule(typeof(UnityPerRequestHttpModule));
         }
 
         /// <summary>Disposes the Unity container when the application is shut down.</summary>
         public static void Shutdown()
         {
-            var container = UnityConfig.GetConfiguredContainer();
+            var container = UnityConfig.ConfiguredContainer;
+
             container.Dispose();
         }
     }
