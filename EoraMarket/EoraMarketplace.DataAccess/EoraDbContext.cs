@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using EoraMarketplace.Data.Domain.Users;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 
 namespace EoraMarketplace.Data
 {

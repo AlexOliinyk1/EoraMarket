@@ -190,6 +190,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Common\Constants\AppConsts.cs" />
     <Compile Include="Common\Extentions\AppUserExtentions.cs" />
     <Compile Include="Controllers\Base\AppController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

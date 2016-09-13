@@ -78,7 +78,16 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\EoraMarketplace.DataAccess\EoraMarketplace.DataAccess.csproj">
+      <Project>{15636a24-85ca-41b2-9840-efc6faa5401e}</Project>
+      <Name>EoraMarketplace.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EoraMarketplace.Data\EoraMarketplace.Data.csproj">
+      <Project>{a2ec559c-1b0e-42da-8e87-8485b9efb5fa}</Project>
+      <Name>EoraMarketplace.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

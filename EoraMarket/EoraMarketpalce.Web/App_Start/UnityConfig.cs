@@ -39,6 +39,7 @@ namespace EoraMarketpalce.Web.App_Start
             WebBootstrapper.SetupDependency(container);
 
             //  register owin dependencies
+            container.RegisterType<IRoleStore<Role, int>, RoleStore<Role, int, UserRoles>>();
             container.RegisterType<IUserStore<User, int>, UserStore<User, Role, int, UserLogins, UserRoles, UserClaims>>();
             container.RegisterType<IAuthenticationManager>(new InjectionFactory(c => HttpContext.Current.GetOwinContext().Authentication));
 
