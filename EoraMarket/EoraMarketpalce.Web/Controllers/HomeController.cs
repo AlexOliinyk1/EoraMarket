@@ -27,9 +27,6 @@ namespace EoraMarketpalce.Web.Controllers
         [Authorize]
         public ActionResult About()
         {
-            var isAdmin = User.IsInRole(AppConsts.AdminRoleName);
-            var id = User.Identity.GetUserId();
-            UserManager.GetEmailAsync()
             ViewBag.Message = "Your application description page.";
 
             return View();
