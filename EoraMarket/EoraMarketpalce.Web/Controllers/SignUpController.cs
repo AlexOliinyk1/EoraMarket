@@ -1,4 +1,5 @@
-﻿using EoraMarketpalce.Web.Common.Identity;
+﻿using EoraMarketpalce.Web.Common.Constants;
+using EoraMarketpalce.Web.Common.Identity;
 using EoraMarketpalce.Web.Controllers.Base;
 using EoraMarketpalce.Web.Models.Auth;
 using EoraMarketplace.Data.Domain.Users;
@@ -50,12 +51,16 @@ namespace EoraMarketpalce.Web.Controllers
 
                 if(result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    var resultRole = await UserManager.AddToRoleAsync(user.Id, AppConsts.UserRoleName);
 
-                    //  TODO: send email confirmation
-                    //string emailCode = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    //var emailCallbackUrl = Url.Action("ConfirmEmail", "SignUp", new { id = user.Id, code = emailCode }, protocol: Request.Url.Scheme);
-                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + emailCallbackUrl + "\">here</a>");
+                    if(resultRole.Succeeded)
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        //  TODO: send email confirmation
+                        //string emailCode = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        //var emailCallbackUrl = Url.Action("ConfirmEmail", "SignUp", new { id = user.Id, code = emailCode }, protocol: Request.Url.Scheme);
+                        //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + emailCallbackUrl + "\">here</a>");
+                    }
 
                     return RedirectToAction("Index", "Home");
                 }

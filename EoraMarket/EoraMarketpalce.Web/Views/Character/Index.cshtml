@@ -1,16 +1,24 @@
-﻿@model EoraMarketpalce.Web.Models.Characters.CharaktersViewModel
+﻿@using EoraMarketplace.Data.Domain.Characters;
+@model EoraMarketpalce.Web.Models.Characters.CharactersVM
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Characters";
 }
 
-<h2>Index</h2>
+<h2>Characters</h2>
 
 <div class="row">
+    <div class="col-md-12">
+        @Html.ActionLink("Create new", "Create", "Character", new { }, new { @class = "btn btn-info" })
+    </div>
     @{
-        foreach(var character in Model.Characters)
+        foreach(Character character in Model.Characters)
         {
             <div class="col-md-4">
                 <h1>@character.Name</h1>
+                <img src="@character.ImageUrl" alt="avatar" height="50" />
+                <span>@character.Race.Name</span>
+                <span>@character.Class.Name</span>
+                <span>@character.Credits</span>
             </div>
         }
     }

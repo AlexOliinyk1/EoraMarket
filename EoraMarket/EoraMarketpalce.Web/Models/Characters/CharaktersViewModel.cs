@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using EoraMarketplace.Data.Domain.Characters;
+using System.Collections.Generic;
 
 namespace EoraMarketpalce.Web.Models.Characters
 {
-    public sealed class CharaktersViewModel
+    public sealed class CharactersVM
     {
-        public List<object> Characters { get; set; }
+        public List<Character> Characters { get; set; }
     }
 }
