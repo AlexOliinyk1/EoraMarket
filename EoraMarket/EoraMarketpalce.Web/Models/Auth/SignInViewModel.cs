@@ -2,7 +2,7 @@
 
 namespace EoraMarketpalce.Web.Models.Auth
 {
-    public class SignInViewModel
+    public sealed class SignInViewModel
     {
         [Required]
         [Display(Name = "Email")]

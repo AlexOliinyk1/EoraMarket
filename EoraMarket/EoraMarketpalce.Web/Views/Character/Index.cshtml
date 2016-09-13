@@ -1,0 +1,17 @@
+﻿@model EoraMarketpalce.Web.Models.Characters.CharaktersViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="row">
+    @{
+        foreach(var character in Model.Characters)
+        {
+            <div class="col-md-4">
+                <h1>@character.Name</h1>
+            </div>
+        }
+    }
+</div>

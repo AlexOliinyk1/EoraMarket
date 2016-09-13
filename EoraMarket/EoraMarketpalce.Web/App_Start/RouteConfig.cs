@@ -10,6 +10,12 @@ namespace EoraMarketpalce.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "SignOut",
+                url: "SignOut",
+                defaults: new { controller = "SignIn", action = "SignOut" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

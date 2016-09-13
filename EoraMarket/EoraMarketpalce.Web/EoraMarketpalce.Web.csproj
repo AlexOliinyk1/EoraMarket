@@ -195,6 +195,7 @@
     <Compile Include="Common\Constants\AppConsts.cs" />
     <Compile Include="Common\Extentions\AppUserExtentions.cs" />
     <Compile Include="Controllers\Base\AppController.cs" />
+    <Compile Include="Controllers\CharacterController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SignInController.cs" />
     <Compile Include="Controllers\SignUpController.cs" />
@@ -205,6 +206,7 @@
     <Compile Include="Models\Auth\SignUpViewModel.cs" />
     <Compile Include="Common\Identity\EoraSignInManager.cs" />
     <Compile Include="Common\Identity\EoraUserManager.cs" />
+    <Compile Include="Models\Characters\CharaktersViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App_Start\Startup.cs" />
   </ItemGroup>
@@ -232,6 +234,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\ViewModels\charakters.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -249,6 +252,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\SignIn\Index.cshtml" />
     <Content Include="Views\SignUp\Index.cshtml" />
+    <Content Include="Views\Character\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

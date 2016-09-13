@@ -1,12 +1,16 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using EoraMarketplace.Data.Domain.Users;
 using System.Data.Entity;
-using System.Data.Entity.Migrations;
+using EoraMarketplace.Data.Domain.Characters;
 
 namespace EoraMarketplace.Data
 {
     public class EoraDbContext : IdentityDbContext<User, Role, int, UserLogins, UserRoles, UserClaims>
     {
+        public virtual IDbSet<Character> Characters { get; set; }
+        public virtual IDbSet<Race> Races { get; set; }
+        public virtual IDbSet<Class> Classes { get; set; }
+
         public EoraDbContext()
             : base("DevConnection")
         { }
