@@ -13,7 +13,30 @@ namespace EoraMarketpalce.Web.Controllers
     {
         public ViewResult Index()
         {
-            List<Character> chars = new List<Character> {
+            List<Character> chars = GetData();
+
+            return View(new CharactersVM {
+                Characters = chars
+            });
+        }
+
+        [HttpGet]
+        public PartialViewResult Create()
+        {
+            return PartialView(new CreateCharacterVM());
+        }
+
+        [HttpPost]
+        public ViewResult Create(CreateCharacterVM model)
+        {
+            return Index();
+        }
+
+
+        //Todo: remove test data later
+        private List<Character> GetData()
+        {
+            return new List<Character> {
                 new Character {
                     Name = "Konan",
                     ImageUrl = "/Content/Test/male_human_p_lg.png",
@@ -36,15 +59,6 @@ namespace EoraMarketpalce.Web.Controllers
                     Race = new Race { Name = "Dwarf" }
                 },
             };
-
-            return View(new CharactersVM {
-                Characters = chars
-            });
-        }
-
-        public ViewResult Create()
-        {
-            return View(new CreateCharacterVM());
         }
     }
 }

@@ -390,6 +390,7 @@
     <Content Include="Views\SignUp\Index.cshtml" />
     <Content Include="Views\Character\Index.cshtml" />
     <Content Include="Views\Character\Create.cshtml" />
+    <Content Include="Views\Shared\_Account.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

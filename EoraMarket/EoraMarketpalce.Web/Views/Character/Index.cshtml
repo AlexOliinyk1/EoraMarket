@@ -3,12 +3,18 @@
 @{
     ViewBag.Title = "Characters";
 }
+@section scripts{
+    @Scripts.Render("~/vm/character")
+}
 
 <h2>Characters</h2>
 
+<div id="createFormContainer" class="row"></div>
+
 <div class="row">
     <div class="col-md-12">
-        @Html.ActionLink("Create new", "Create", "Character", new { }, new { @class = "btn btn-info" })
+        @*@Html.ActionLink("Create new", "Create", "Character", new { }, new { @class = "btn btn-info" })*@
+        <button class="" onclick="vm.StartCreateCharakter()">Create new</button>
     </div>
     @{
         foreach(Character character in Model.Characters)
