@@ -1,4 +1,5 @@
 ﻿using EoraMarketpalce.Web.Common.Constants;
+using EoraMarketpalce.Web.Common.Filters;
 using EoraMarketpalce.Web.Controllers.Base;
 using EoraMarketpalce.Web.Models.Characters;
 using EoraMarketplace.Data.Domain.Characters;
@@ -7,7 +8,7 @@ using System.Web.Mvc;
 
 namespace EoraMarketpalce.Web.Controllers
 {
-    [Authorize(Roles = AppConsts.UserRoleName)]
+    [AccessAuthorize(Roles = AppConsts.UserRoleName)]
     public class CharacterController : AppController
     {
         public ViewResult Index()
