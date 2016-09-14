@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Domain\Characters\Character.cs" />
     <Compile Include="Domain\Characters\Class.cs" />
+    <Compile Include="Domain\Characters\Image.cs" />
     <Compile Include="Domain\Characters\Race.cs" />
     <Compile Include="Domain\Users\Role.cs" />
     <Compile Include="Domain\Users\User.cs" />

@@ -1,29 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EoraMarket.DataAccess.Repositories
+namespace EoraMarketplace.DataAccess.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         private readonly DbContext _context;
-
         private IDbSet<TEntity> _entities;
 
         public IQueryable<TEntity> Table
         {
             get {
-                throw new NotImplementedException();
+                return this._entities;
             }
         }
 
         public IQueryable<TEntity> TableNoTracking
         {
             get {
-                throw new NotImplementedException();
+                return this._entities.AsNoTracking();
             }
         }
 
@@ -33,43 +34,46 @@ namespace EoraMarket.DataAccess.Repositories
         /// <param name="context"></param>
         public Repository(DbContext context)
         {
-            _context = context;
+            this._context = context;
+            this._entities = context.Set<TEntity>();
         }
 
-        public TEntity GetById(object id)
+        public TEntity GetById(int id)
         {
-            throw new NotImplementedException();
+            return _entities.Find(id);
         }
 
-        public void Insert(TEntity entity)
+        public TEntity Insert(TEntity entity)
         {
-            throw new NotImplementedException();
-        }
+            if(entity == null)
+                throw new ArgumentNullException("entity");
 
-        public void Insert(IEnumerable<TEntity> entities)
-        {
-            throw new NotImplementedException();
+            this._entities.AddOrUpdate(entity);
+            this._context.SaveChanges();
+
+            return entity;
         }
 
         public void Delete(TEntity entity)
         {
-            throw new NotImplementedException();
+            if(entity == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+
+            this._entities.Remove(entity);
+            this._context.SaveChanges();
         }
 
-        public void Delete(IEnumerable<TEntity> entities)
+        public TEntity Update(TEntity entity)
         {
-            throw new NotImplementedException();
-        }
+            if(entity == null)
+                throw new ArgumentNullException("entity");
 
-        public void Update(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
+            this._entities.AddOrUpdate(entity);
+            this._context.SaveChanges();
 
-        public void Update(IEnumerable<TEntity> entities)
-        {
-            throw new NotImplementedException();
+            return entity;
         }
-
     }
 }

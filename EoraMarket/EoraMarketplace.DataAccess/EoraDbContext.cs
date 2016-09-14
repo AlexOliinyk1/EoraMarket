@@ -10,6 +10,7 @@ namespace EoraMarketplace.Data
         public virtual IDbSet<Character> Characters { get; set; }
         public virtual IDbSet<Race> Races { get; set; }
         public virtual IDbSet<Class> Classes { get; set; }
+        public virtual IDbSet<AvatarImage> Avatars { get; set; }
 
         public EoraDbContext()
             : base("DevConnection")

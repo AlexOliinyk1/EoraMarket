@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using EoraMarketplace.Data.Domain.Characters;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 
 namespace EoraMarketplace.Data.Domain.Users
 {
@@ -7,5 +9,6 @@ namespace EoraMarketplace.Data.Domain.Users
     /// </summary>
     public class User : IdentityUser<int, UserLogins, UserRoles, UserClaims>
     {
+        public ICollection<Character> Characters { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace EoraMarketplace.Injector
 
         public static IUnityContainer SetupDependency(IUnityContainer container)
         {
-            Bootstrapper<T>.Instance.RegisterTypes(container);
+            Instance.RegisterTypes(container);
             return container;
         }
 

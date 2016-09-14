@@ -1,15 +1,13 @@
 using System;
 using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.Configuration;
 using EoraMarketplace.Injector.Web;
 using Microsoft.AspNet.Identity;
-using System.Web.Mvc;
-using Microsoft.Practices.Unity.Mvc;
 using EoraMarketpalce.Web.Common.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using EoraMarketplace.Data.Domain.Users;
 using Microsoft.Owin.Security;
 using System.Web;
+using EoraMarketplace.Injector.Services;
 
 namespace EoraMarketpalce.Web.App_Start
 {
@@ -37,6 +35,8 @@ namespace EoraMarketpalce.Web.App_Start
         {
             //  register global dependencies
             WebBootstrapper.SetupDependency(container);
+            RepositoryBootstrapper.SetupDependency(container);
+            ServiceBootstrapper.SetupDependency(container);
 
             //  register owin dependencies
             container.RegisterType<IRoleStore<Role, int>, RoleStore<Role, int, UserRoles>>();

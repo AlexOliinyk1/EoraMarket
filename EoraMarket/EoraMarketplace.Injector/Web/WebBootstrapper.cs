@@ -1,11 +1,9 @@
-﻿using System;
-using Microsoft.Practices.Unity;
-using EoraMarket.DataAccess.Repositories;
+﻿using Microsoft.Practices.Unity;
 using EoraMarketplace.Data.Domain.Users;
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 using EoraMarketplace.Data;
+using EoraMarketplace.DataAccess.Repositories;
 
 namespace EoraMarketplace.Injector.Web
 {
@@ -15,9 +13,6 @@ namespace EoraMarketplace.Injector.Web
         {
             container.RegisterType<DbContext, EoraDbContext>();
             container.RegisterType<IdentityDbContext<User, Role, int, UserLogins, UserRoles, UserClaims>, EoraDbContext>();
-
-            container.RegisterType<IRepository<User>, Repository<User>>();
-            container.RegisterType<IRepository<Role>, Repository<Role>>();
         }
     }
 }
