@@ -1,4 +1,5 @@
 ﻿using EoraMarketplace.Data.Domain.Users;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,6 +9,7 @@ namespace EoraMarketplace.Data.Domain.Characters
     {
         [Key]
         public int Id { get; set; }
+        public DateTime CreatedAt { get; set; }
         public string Name { get; set; }
         public string ImageUrl { get; set; }
         public int Credits { get; set; }

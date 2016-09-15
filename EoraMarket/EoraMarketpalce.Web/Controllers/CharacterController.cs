@@ -3,17 +3,33 @@ using EoraMarketpalce.Web.Common.Filters;
 using EoraMarketpalce.Web.Controllers.Base;
 using EoraMarketpalce.Web.Models.Characters;
 using EoraMarketplace.Data.Domain.Characters;
+using EoraMarketplace.Services.Characters;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using System.Linq;
+using EoraMarketplace.Data.Domain.Users;
 
 namespace EoraMarketpalce.Web.Controllers
 {
     [AccessAuthorize(Roles = AppConsts.UserRoleName)]
     public class CharacterController : AppController
     {
+        private ICharacterService _characterService;
+
+        /// <summary>
+        ///     Ctor.
+        /// </summary>
+        /// <param name="service"></param>
+        public CharacterController(ICharacterService service)
+        {
+            this._characterService = service;
+        }
+
         public ViewResult Index()
         {
-            List<Character> chars = GetData();
+            int userId = User.Identity.GetUserId<int>();
+            List<Character> chars = _characterService.GetUserCharacters(userId, 0, 10).ToList();
 
             return View(new CharactersVM {
                 Characters = chars
