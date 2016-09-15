@@ -2,16 +2,55 @@
 @{
     ViewBag.Title = "Create Character";
 }
+@section scripts{
+    @Scripts.Render("~/vm/character")
+}
 
 <h2>Create Character</h2>
 
-<div class="row">
-    <div class="col-md-12">
-        @Html.EditorForModel()
-    </div>
-    <div class="col-md-12">
-        <button class="btn btn-success">Create</button>
-        @Html.ActionLink("Cancel", "", "Character", null, new { @class = "btn btn-danger" })
-    </div>
-</div>
+@using(Ajax.BeginForm("Create", "Character", new AjaxOptions { HttpMethod = "POST", OnSuccess = "vm.succefullyCreated" }, new { }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.ImageUrl, new { @class = "form-control", id = "selectedImage" })
 
+    <div class="form-group">
+        <div class="row">
+            @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <img src="~/Content/Images/player/Aumaua/f/female_aumaua_b_lg.png" />
+    <img src="~/Content/Images/player/Aumaua/m/male_aumaua_a_lg.png" />
+    <div class="form-group">
+        <div class="row">
+            @Html.Label("Select Race", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(x => x.SelectedRaceId, Model.GetRacesSelectedList())
+                @Html.ValidationMessageFor(m => m.SelectedRaceId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            @Html.Label("Select Class", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(x => x.SelectedClassId, Model.GetClassesSelectedList())
+                @Html.ValidationMessageFor(m => m.SelectedClassId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-success">Create</button>
+                @Html.ActionLink("Cancel", "", "Character", null, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+}

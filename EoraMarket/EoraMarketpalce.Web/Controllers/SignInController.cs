@@ -56,6 +56,7 @@ namespace EoraMarketpalce.Web.Controllers
         /// <param name="returnUrl">Url of location where user was before auth request</param>
         /// <returns></returns>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(SignInViewModel login, string returnUrl)
         {
             if(!ModelState.IsValid)
@@ -79,7 +80,8 @@ namespace EoraMarketpalce.Web.Controllers
         ///     Process log out request
         /// </summary>
         /// <returns></returns>
-        public async Task<ActionResult> SignOut()
+        [ValidateAntiForgeryToken]
+        public async Task<RedirectToRouteResult> SignOut()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
 

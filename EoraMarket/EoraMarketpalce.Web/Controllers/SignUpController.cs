@@ -42,6 +42,7 @@ namespace EoraMarketpalce.Web.Controllers
         /// <param name="register">Sign up view model</param>
         /// <returns></returns>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(SignUpViewModel register)
         {
             if(ModelState.IsValid)

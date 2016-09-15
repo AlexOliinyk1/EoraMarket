@@ -9,12 +9,14 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using System.Linq;
 using EoraMarketplace.Data.Domain.Users;
+using System;
 
 namespace EoraMarketpalce.Web.Controllers
 {
     [AccessAuthorize(Roles = AppConsts.UserRoleName)]
     public class CharacterController : AppController
     {
+        const int START_COSTS = 1000;
         private ICharacterService _characterService;
 
         /// <summary>
@@ -29,52 +31,42 @@ namespace EoraMarketpalce.Web.Controllers
         public ViewResult Index()
         {
             int userId = User.Identity.GetUserId<int>();
-            List<Character> chars = _characterService.GetUserCharacters(userId, 0, 10).ToList();
 
-            return View(new CharactersVM {
-                Characters = chars
+            List<Character> chars = _characterService.GetUserCharacters(userId, 1, 10).ToList();
+
+            return View(new CharactersVM() {
+                Characters = chars,
             });
         }
 
         [HttpGet]
-        public PartialViewResult Create()
+        public ViewResult Create()
         {
-            return PartialView(new CreateCharacterVM());
+            CreateCharacterVM model = new CreateCharacterVM {
+                Races = _characterService.GetCharactersRaces(),
+                Classes = _characterService.GetCharactersClasses()
+            };
+
+            return View(model);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ViewResult Create(CreateCharacterVM model)
         {
-            return Index();
-        }
-
-
-        //Todo: remove test data later
-        private List<Character> GetData()
-        {
-            return new List<Character> {
-                new Character {
-                    Name = "Konan",
-                    ImageUrl = "/Content/Test/male_human_p_lg.png",
-                    Class = new Class { Name = "Barbarian" },
-                    Credits = 500,
-                    Race = new Race { Name = "Human" }
-                },
-                new Character {
-                    Name = "Elanor",
-                    ImageUrl = "/Content/Test/male_human_p_lg.png",
-                    Class = new Class { Name = "Druid" },
-                    Credits = 750,
-                    Race = new Race { Name = "Godlike" }
-                },
-                new Character {
-                    Name = "Bilbo",
-                    ImageUrl = "/Content/Test/male_human_p_lg.png",
-                    Class = new Class { Name = " Chanter" },
-                    Credits = 800,
-                    Race = new Race { Name = "Dwarf" }
-                },
+            Character character = new Character {
+                Name = model.Name,
+                CreatedAt = DateTime.UtcNow,
+                Credits = START_COSTS,
+                ImageUrl = model.ImageUrl,
+                OwnerId = User.Identity.GetUserId<int>(),
+                ClassId = model.SelectedClassId,
+                RaceId = model.SelectedRaceId
             };
+
+            character = _characterService.CreateUserCharacter(character);
+
+            return Index();
         }
     }
 }

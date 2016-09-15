@@ -1,9 +1,4 @@
-﻿(function () {
-})();
-
-var vm = new CharacrterViewModel();
-
-function CharacrterViewModel() {
+﻿function CharacrterViewModel() {
     var self = this;
 
     self.StartCreateCharakter = function () {
@@ -12,4 +7,12 @@ function CharacrterViewModel() {
         });
         //$.ajax({url: "",type: "GET"}).success(function (result) {});
     }
+
+    self.succefullyCreated = function (result) {
+        alert(result);
+    }
 }
+
+(function () {
+    var vm = new CharacrterViewModel();
+})();
