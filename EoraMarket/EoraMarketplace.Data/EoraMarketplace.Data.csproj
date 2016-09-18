@@ -59,8 +59,12 @@
   <ItemGroup>
     <Compile Include="Domain\Characters\Character.cs" />
     <Compile Include="Domain\Characters\Class.cs" />
-    <Compile Include="Domain\Characters\Image.cs" />
+    <Compile Include="Domain\Images\Picture.cs" />
     <Compile Include="Domain\Characters\Race.cs" />
+    <Compile Include="Domain\Goods\Product.cs" />
+    <Compile Include="Domain\Goods\ProductStat.cs" />
+    <Compile Include="Domain\Goods\ProductType.cs" />
+    <Compile Include="Domain\Goods\MarketProduct.cs" />
     <Compile Include="Domain\Users\Role.cs" />
     <Compile Include="Domain\Users\User.cs" />
     <Compile Include="Domain\Users\UserClaims.cs" />
@@ -72,6 +76,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

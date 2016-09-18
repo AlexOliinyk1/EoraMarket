@@ -58,7 +58,7 @@ namespace EoraMarketpalce.Web.Controllers
                 Name = model.Name,
                 CreatedAt = DateTime.UtcNow,
                 Credits = START_COSTS,
-                ImageUrl = model.ImageUrl,
+                //ImageUrl = model.ImageUrl,
                 OwnerId = User.Identity.GetUserId<int>(),
                 ClassId = model.SelectedClassId,
                 RaceId = model.SelectedRaceId

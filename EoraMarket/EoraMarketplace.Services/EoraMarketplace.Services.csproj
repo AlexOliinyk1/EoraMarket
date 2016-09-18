@@ -84,6 +84,8 @@
     <Compile Include="Characters\CharacterService.cs" />
     <Compile Include="Characters\ICharacterService.cs" />
     <Compile Include="Email\EmailService.cs" />
+    <Compile Include="Goods\GoodsService.cs" />
+    <Compile Include="Goods\IGoodsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

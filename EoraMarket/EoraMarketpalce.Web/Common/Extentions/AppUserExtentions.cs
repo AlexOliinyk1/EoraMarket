@@ -11,5 +11,10 @@ namespace EoraMarketpalce.Web.Common.Extentions
         {
             return manager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
         }
+
+        public static Task<ClaimsIdentity> GenerateUserIdentityAsync(this User user, UserManager<User, int> manager, string authType)
+        {
+            return manager.CreateIdentityAsync(user, authType);
+        }
     }
 }

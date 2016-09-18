@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using EoraMarketplace.Data.Domain.Images;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace EoraMarketplace.Data.Domain.Characters
@@ -10,6 +11,6 @@ namespace EoraMarketplace.Data.Domain.Characters
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public ICollection<AvatarImage> AvailableAvatars { get; set; }
+        public ICollection<Picture> AvailableAvatars { get; set; }
     }
 }

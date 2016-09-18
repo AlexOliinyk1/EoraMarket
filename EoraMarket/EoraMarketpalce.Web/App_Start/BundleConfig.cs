@@ -29,6 +29,9 @@ namespace EoraMarketpalce.Web
 
             bundles.Add(new ScriptBundle("~/vm/character").Include(
                 "~/Scripts/ViewModels/charakters.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
+                "~/Scripts/knockout-3.4.0.js"));
         }
 
         private static void RregisterStyles(BundleCollection bundles)

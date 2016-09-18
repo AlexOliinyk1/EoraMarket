@@ -7,15 +7,20 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 using System;
-using Microsoft.AspNet.Identity.EntityFramework;
 using System.Web.Mvc;
 using EoraMarketpalce.Web.Common.Constants;
+using Microsoft.Owin.Security.OAuth;
+using EoraMarketpalce.Web.Common.Providers;
 
 [assembly: OwinStartup(typeof(EoraMarketpalce.Web.Startup))]
 namespace EoraMarketpalce.Web
 {
     public class Startup
     {
+        public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
+
+        public static string PublicClientId { get; private set; }
+
         /// <summary>
         ///     Configure owin context for application
         /// </summary>
@@ -36,6 +41,16 @@ namespace EoraMarketpalce.Web
                 }
             });
 
+            PublicClientId = "self";
+            OAuthOptions = new OAuthAuthorizationServerOptions {
+                TokenEndpointPath = new PathString("/Token"),
+                Provider = new ApplicationOAuthProvider(PublicClientId),
+                AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
+                AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
+                AllowInsecureHttp = true
+            };
+
+            app.UseOAuthBearerTokens(OAuthOptions);
         }
 
         /// <summary>
