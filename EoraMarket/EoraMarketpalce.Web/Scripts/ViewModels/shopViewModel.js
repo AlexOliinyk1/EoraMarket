@@ -36,7 +36,18 @@
         });
     }
 
+    function getUserCharacter() {
+        $.get("/Charcter/GetActiveCharacter").success(function (result) {
+            console.log(result);
+
+            self.goods(result);
+        }).fail(function (result) {
+            console.log(result);
+        });
+    }
     self.init = function () {
+        getUserCharacter();
+
         loadGoods();
         //loadRaces();
         //loadClasses();

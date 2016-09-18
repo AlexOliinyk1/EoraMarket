@@ -16,7 +16,6 @@ namespace EoraMarketpalce.Web.Controllers
     [AccessAuthorize(Roles = AppConsts.UserRoleName)]
     public class CharacterController : AppController
     {
-        const int START_COSTS = 1000;
         private ICharacterService _characterService;
 
         /// <summary>
@@ -39,6 +38,11 @@ namespace EoraMarketpalce.Web.Controllers
             });
         }
 
+        public JsonResult GetActiveCharakter()
+        {
+            return Json(ActiveCharacter);
+        }
+
         [HttpGet]
         public ViewResult Create()
         {
@@ -52,21 +56,35 @@ namespace EoraMarketpalce.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ViewResult Create(CreateCharacterVM model)
+        public ActionResult Create(CreateCharacterVM model)
         {
-            Character character = new Character {
-                Name = model.Name,
-                CreatedAt = DateTime.UtcNow,
-                Credits = START_COSTS,
-                //ImageUrl = model.ImageUrl,
-                OwnerId = User.Identity.GetUserId<int>(),
-                ClassId = model.SelectedClassId,
-                RaceId = model.SelectedRaceId
-            };
+            if(ModelState.IsValid)
+            {
+                Character character = new Character {
+                    Name = model.Name,
+                    CreatedAt = DateTime.UtcNow,
+                    Credits = AppConsts.START_COSTS,
+                    ImageId = model.ImageId.Value,
+                    OwnerId = User.Identity.GetUserId<int>(),
+                    ClassId = model.SelectedClassId,
+                    RaceId = model.SelectedRaceId
+                };
 
-            character = _characterService.CreateUserCharacter(character);
+                character = _characterService.CreateUserCharacter(character);
 
-            return Index();
+                return RedirectToAction("Index");
+            }
+
+            model.Races = _characterService.GetCharactersRaces();
+            model.Classes = _characterService.GetCharactersClasses();
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public JsonResult GetAvatarsByRace(int raceId)
+        {
+            return Json(_characterService.GetAvatarsByRaceId(raceId), JsonRequestBehavior.AllowGet);
         }
     }
 }

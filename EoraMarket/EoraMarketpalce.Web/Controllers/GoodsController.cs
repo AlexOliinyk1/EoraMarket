@@ -29,15 +29,13 @@ namespace EoraMarketpalce.Web.Controllers
         [HttpGet]
         public List<ProductModel> GetGoods(Class customerClass, int skip, int take)
         {
-            int id = User.Identity.GetUserId<int>();
-
             List<ProductModel> goods = _goodsService.GetGoods(customerClass, skip, take)
                 .Select(x => new ProductModel {
-                    Name = x.Name,
+                    Name = x.Product.Name,
                     Id = x.Id,
-                    Price = x.Price,
-                    //Available = x..Quantity,
-                    ImageUrl = x.Image.ImageUrl
+                    Price = x.Product.Price,
+                    Available = x.Quantity,
+                    ImageUrl = x.Product.Image.ImageUrl
                 })
                 .ToList();
 

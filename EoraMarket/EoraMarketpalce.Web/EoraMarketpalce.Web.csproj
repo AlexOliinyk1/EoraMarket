@@ -398,6 +398,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\ViewModels\characterCreate.js" />
     <Content Include="Scripts\ViewModels\charakters.js" />
     <Content Include="Scripts\ViewModels\shopViewModel.js" />
     <Content Include="Scripts\_references.js" />
@@ -425,6 +426,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Common\Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

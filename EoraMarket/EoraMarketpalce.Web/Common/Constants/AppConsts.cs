@@ -1,6 +1,6 @@
 ﻿namespace EoraMarketpalce.Web.Common.Constants
 {
-    public sealed class AppConsts
+    internal sealed class AppConsts
     {
         private AppConsts() { }
 
@@ -13,5 +13,10 @@
         public const string SuperUserName = "admin@eora.com";
         public const string SuperUserPass = "1234qwer!";
         #endregion
+
+        public const string CHARACTER_STORE_NAME = "characterId";
+
+        public const int START_COSTS = 100000;
+        public const int MONEY_MULTIPLIER = 100;
     }
 }

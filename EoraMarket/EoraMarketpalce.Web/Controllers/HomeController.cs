@@ -21,6 +21,9 @@ namespace EoraMarketpalce.Web.Controllers
 
         public ActionResult Index()
         {
+            if(User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Shop");
+
             return View();
         }
 

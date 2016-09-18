@@ -3,54 +3,62 @@
     ViewBag.Title = "Create Character";
 }
 @section scripts{
-    @Scripts.Render("~/vm/character")
+    @Scripts.Render("~/Scripts/ViewModels/characterCreate.js")
+    @Scripts.Render("~/bundles/jqueryval")
 }
 
 <h2>Create Character</h2>
 
-@using(Ajax.BeginForm("Create", "Character", new AjaxOptions { HttpMethod = "POST", OnSuccess = "vm.succefullyCreated" }, new { }))
-{
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(x => x.ImageUrl, new { @class = "form-control", id = "selectedImage" })
+<div class="row">
+    <div class="col-md-6">
 
-    <div class="form-group">
-        <div class="row">
-            @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
-    <img src="~/Content/Images/player/Aumaua/f/female_aumaua_b_lg.png" />
-    <img src="~/Content/Images/player/Aumaua/m/male_aumaua_a_lg.png" />
-    <div class="form-group">
-        <div class="row">
-            @Html.Label("Select Race", new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(x => x.SelectedRaceId, Model.GetRacesSelectedList())
-                @Html.ValidationMessageFor(m => m.SelectedRaceId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
+        @using(Html.BeginForm("Create", "Character", FormMethod.Post, new { id = "createCharacter" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(x => x.ImageId, new { @class = "form-control", id = "selectedImage", data_bind = "value:selectedImageId" })
 
-    <div class="form-group">
-        <div class="row">
-            @Html.Label("Select Class", new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(x => x.SelectedClassId, Model.GetClassesSelectedList())
-                @Html.ValidationMessageFor(m => m.SelectedClassId, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="row">
+                    @Html.LabelFor(m => m.Name, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+                        @Html.ValidationMessageFor(m => m.ImageId, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-
-    <div class="form-group">
-
-        <div class="row">
-            <div class="col-md-12">
-                <button type="submit" class="btn btn-success">Create</button>
-                @Html.ActionLink("Cancel", "", "Character", null, new { @class = "btn btn-danger" })
+            <div class="form-group">
+                <div class="row">
+                    @Html.Label("Select Race", new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(x => x.SelectedRaceId, Model.GetRacesSelectedList(), new { @class = "form-control", id = "raceSelect", data_bind = "value:selectedRaceId" })
+                        @Html.ValidationMessageFor(m => m.SelectedRaceId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
-        </div>
+
+            <div class="form-group">
+                <div class="row">
+                    @Html.Label("Select Class", new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(x => x.SelectedClassId, Model.GetClassesSelectedList(), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.SelectedClassId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-success">Create</button>
+                        @Html.ActionLink("Cancel", "", "Character", null, new { @class = "btn btn-danger" })
+                    </div>
+                </div>
+            </div>
+                            }
     </div>
-}
+    <div class="col-md-6" data-bind="foreach:availableAvatars">
+        <img height="250" data-bind="attr: {src:ImageUrl, alt:Id}, click: $root.selectAvatar(Id), css:{'active-image': $data.Id==$root.selectedImageId()}" />
+    </div>
+</div>

@@ -1,18 +1,13 @@
-﻿function CharacrterViewModel() {
+﻿function characterViewModel() {
     var self = this;
 
-    self.StartCreateCharakter = function () {
-        $.get("/Character/Create", "", function (result) {
-            $("#createFormContainer").html(result);
-        });
-        //$.ajax({url: "",type: "GET"}).success(function (result) {});
-    }
-
-    self.succefullyCreated = function (result) {
-        alert(result);
-    }
+    self.init = function () {
+    };
 }
 
-(function () {
-    var vm = new CharacrterViewModel();
-})();
+var vm;
+$(document).ready(function () {
+    vm = new characterViewModel();
+    vm.init();
+    ko.applyBindings(vm);
+});

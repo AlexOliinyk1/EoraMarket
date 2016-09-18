@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using EoraMarketpalce.Web.Common.Constants;
+using EoraMarketplace.Data.Domain.Characters;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Web.Mvc;
 
@@ -6,6 +8,21 @@ namespace EoraMarketpalce.Web.Controllers.Base
 {
     public class AppController : Controller
     {
+        /// <summary>
+        ///     Get or set active user character stored in session
+        /// </summary>
+        public Character ActiveCharacter
+        {
+            get {
+                if(Session[AppConsts.CHARACTER_STORE_NAME] == null)
+                    return null;
+                return Session[AppConsts.CHARACTER_STORE_NAME] as Character;
+            }
+            set {
+                Session[AppConsts.CHARACTER_STORE_NAME] = value;
+            }
+        }
+
         protected ActionResult RedirectToLocal(string returnUrl)
         {
             if(Url.IsLocalUrl(returnUrl))

@@ -17,14 +17,14 @@
         @*<button class="" onclick="vm.StartCreateCharakter()">Create new</button>*@
     </div>
     @{
-        foreach(Character character in Model.Characters)
+        foreach(Character item in Model.Characters)
         {
             <div class="col-md-4">
-                <h1>@character.Name</h1>
-                <img src="@character.ImageUrl" alt="avatar" height="50" />
-                <span>@character.Race.Name</span>
-                <span>@character.Class.Name</span>
-                <span>@character.Credits</span>
+                <h1>@item.Name</h1>
+                <img src="@item.Avatar.ImageUrl" alt="avatar" height="50" />
+                <span>@item.Race.Name</span>
+                <span>@item.Class.Name</span>
+                <span>@item.Credits</span>
             </div>
         }
     }

@@ -1,4 +1,6 @@
-﻿using EoraMarketpalce.Web.Common.Identity;
+﻿using EoraMarketpalce.Web.Common.Constants;
+using EoraMarketpalce.Web.Common.Extentions;
+using EoraMarketpalce.Web.Common.Identity;
 using EoraMarketpalce.Web.Controllers.Base;
 using EoraMarketpalce.Web.Models.Auth;
 using Microsoft.AspNet.Identity;
@@ -65,10 +67,17 @@ namespace EoraMarketpalce.Web.Controllers
             }
 
             var result = await SignInManager.PasswordSignInAsync(login.Email, login.Password, login.RememberMe, shouldLockout: false);
+
+
+
+
             switch(result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    if(!string.IsNullOrEmpty(returnUrl))
+                        return RedirectToLocal(returnUrl);
+
+                    return RedirectToAction("Index", "Home");
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");

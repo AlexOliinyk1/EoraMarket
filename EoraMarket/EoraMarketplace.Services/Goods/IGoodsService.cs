@@ -6,6 +6,6 @@ namespace EoraMarketplace.Services.Goods
 {
     public interface IGoodsService
     {
-        List<Product> GetGoods(Class forClass,int skip, int take);
+        List<MarketProduct> GetGoods(Class forClass,int skip, int take);
     }
 }

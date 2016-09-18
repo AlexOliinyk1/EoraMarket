@@ -4,7 +4,7 @@ using EoraMarketplace.Data.Domain.Characters;
 using EoraMarketplace.DataAccess.Repositories;
 using System.Linq;
 using System.Data.Entity;
-
+using EoraMarketplace.Data.Domain.Images;
 
 namespace EoraMarketplace.Services.Characters
 {
@@ -49,6 +49,9 @@ namespace EoraMarketplace.Services.Characters
                 .OrderBy(x => x.CreatedAt)
                 .Skip(skipElements)
                 .Take(take)
+                .Include(x => x.Avatar)
+                .Include(x => x.Class)
+                .Include(x => x.Race)
                 .ToList();
 
             return characters;
@@ -61,7 +64,15 @@ namespace EoraMarketplace.Services.Characters
 
         public List<Race> GetCharactersRaces()
         {
-            return _raceRepository.Table.Include(x => x.AvailableAvatars).ToList();
+            return _raceRepository.Table.ToList();
+        }
+
+        public List<Picture> GetAvatarsByRaceId(int id)
+        {
+            return _raceRepository.Table
+                .Where(x => x.Id == id)
+                .SelectMany(x => x.AvailableAvatars)
+                .ToList();
         }
     }
 }

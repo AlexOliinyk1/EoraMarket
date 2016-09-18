@@ -9,23 +9,22 @@ namespace EoraMarketplace.Services.Goods
 {
     public class GoodsService : IGoodsService
     {
-        private readonly IRepository<Product> _goodsRepository;
+        private readonly IRepository<MarketProduct> _goodsRepository;
 
         /// <summary>
         ///     Ctor.
         /// </summary>
         /// <param name="goodsRepository"></param>
-        public GoodsService(IRepository<Product> goodsRepository)
+        public GoodsService(IRepository<MarketProduct> goodsRepository)
         {
             this._goodsRepository = goodsRepository;
         }
 
-        public List<Product> GetGoods(Class forClass, int skip, int take)
+        public List<MarketProduct> GetGoods(Class forClass, int skip, int take)
         {
-            //  TODO: make class for product
             return _goodsRepository.Table
-                //.Where(x => x.Class == forClass.Name)
-                .OrderBy(x => x.Name)
+                .Where(x => x.Product.Classes.Any(c => c.Name == forClass.Name))
+                .OrderBy(x => x.Product.Name)
                 .Skip(skip)
                 .Take(take)
                 .ToList();

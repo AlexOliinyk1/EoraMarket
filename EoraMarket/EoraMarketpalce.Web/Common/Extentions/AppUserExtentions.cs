@@ -1,6 +1,8 @@
-﻿using EoraMarketplace.Data.Domain.Users;
+﻿using EoraMarketpalce.Web.Common.Constants;
+using EoraMarketplace.Data.Domain.Users;
 using Microsoft.AspNet.Identity;
 using System.Security.Claims;
+using System.Security.Principal;
 using System.Threading.Tasks;
 
 namespace EoraMarketpalce.Web.Common.Extentions
@@ -15,6 +17,16 @@ namespace EoraMarketpalce.Web.Common.Extentions
         public static Task<ClaimsIdentity> GenerateUserIdentityAsync(this User user, UserManager<User, int> manager, string authType)
         {
             return manager.CreateIdentityAsync(user, authType);
+        }
+
+        public static bool IsAdmin(this IPrincipal identity)
+        {
+            return identity.IsInRole(AppConsts.AdminRoleName);
+        }
+
+        public static bool IsUser(this IPrincipal identity)
+        {
+            return identity.IsInRole(AppConsts.UserRoleName);
         }
     }
 }
