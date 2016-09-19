@@ -6,6 +6,9 @@
 @section scripts{
     @Scripts.Render("~/vm/character")
 }
+@section styles{
+    <link href="~/Content/CharactersStyles.css" rel="stylesheet" />
+}
 
 <h2>Characters</h2>
 
@@ -16,16 +19,23 @@
         @Html.ActionLink("Create new", "Create", "Character", new { }, new { @class = "btn btn-info" })
         @*<button class="" onclick="vm.StartCreateCharakter()">Create new</button>*@
     </div>
-    @{
-        foreach(Character item in Model.Characters)
-        {
-            <div class="col-md-4">
-                <h1>@item.Name</h1>
-                <img src="@item.Avatar.ImageUrl" alt="avatar" height="50" />
-                <span>@item.Race.Name</span>
-                <span>@item.Class.Name</span>
-                <span>@item.Credits</span>
-            </div>
+
+    <div class="col-md-12 char-container">
+        @{
+            foreach(Character item in Model.Characters)
+            {
+                <div id="@item.Id" class="character card" style="background: url('@item.Avatar.ImageUrl') no-repeat; background-size: cover;">
+                    <div class="options btn-group">
+                        @Html.ActionLink("View", "View", "Character", null, new { @class = "btn btn-default btn-xs" })
+                        @Html.ActionLink("Select", "SelectCharacter", "Character", new { characterId = item.Id }, new { @class = "btn btn-success btn-xs" })
+                    </div>
+                    <div class="caption">
+                        @item.Name<br />
+                        <p>(@item.Race.Name / @item.Class.Name)</p>
+                        <p class="right">Golds: @item.Credits</p>
+                    </div>
+                </div>
+            }
         }
-    }
+    </div>
 </div>

@@ -20,6 +20,14 @@ namespace EoraMarketplace.Services.Characters
         /// <returns></returns>
         Character GetUserCharacter(int userId, int charId);
         /// <summary>
+        ///     Get character for user include related entities
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="charId"></param>
+        /// <param name="includeAll"></param>
+        /// <returns></returns>
+        Character GetUserCharacter(int userId, int charId, bool includeAll);
+        /// <summary>
         ///     Get characters for user by page.
         /// </summary>
         /// <param name="userId">Id of characters owner</param>

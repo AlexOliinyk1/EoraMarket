@@ -34,8 +34,4 @@ $(document).ready(function () {
     var vm = new characterViewModel();
     vm.init();
     ko.applyBindings(vm);
-
-    //$.validator.setDefaults({
-    //    ignore: ""
-    //})
 });

@@ -32,9 +32,25 @@ namespace EoraMarketplace.Services.Characters
 
         public Character GetUserCharacter(int userId, int charId)
         {
-            Character character = _repository.GetById(charId);
+            return GetUserCharacter(userId, charId, false);
+        }
 
-            if(!character.OwnerId.Equals(userId))
+        public Character GetUserCharacter(int userId, int charId, bool includeAll)
+        {
+            IQueryable<Character> characters = _repository.Table
+                .Where(x => x.Id == charId);
+
+            if(includeAll)
+            {
+                characters = characters
+                    .Include(x => x.Avatar)
+                    .Include(x => x.Class)
+                    .Include(x => x.Race);
+            }
+
+            Character character = characters.FirstOrDefault();
+
+            if(character == null || !character.OwnerId.Equals(userId))
                 throw new Exception("Not found character ID for current user.");
 
             return character;

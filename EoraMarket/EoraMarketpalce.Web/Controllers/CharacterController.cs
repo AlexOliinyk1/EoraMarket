@@ -38,6 +38,20 @@ namespace EoraMarketpalce.Web.Controllers
             });
         }
 
+        public ActionResult SelectCharacter(int characterId)
+        {
+            int userId = User.Identity.GetUserId<int>();
+
+            ActiveCharacter = _characterService.GetUserCharacter(userId, characterId);
+
+            return RedirectToAction("Index", "Shop");
+        }
+
+        public ViewResult View(int id)
+        {
+            return View(new Character());
+        }
+
         public JsonResult GetActiveCharakter()
         {
             return Json(ActiveCharacter);
@@ -81,7 +95,6 @@ namespace EoraMarketpalce.Web.Controllers
             return View(model);
         }
 
-        [HttpGet]
         public JsonResult GetAvatarsByRace(int raceId)
         {
             return Json(_characterService.GetAvatarsByRaceId(raceId), JsonRequestBehavior.AllowGet);
