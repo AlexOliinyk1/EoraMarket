@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace EoraMarketpalce.Web.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : AppController
     {
         public EoraUserManager UserManager { get; private set; }
@@ -33,6 +34,12 @@ namespace EoraMarketpalce.Web.Controllers
             ViewBag.Message = "Your application description page.";
 
             return View();
+        }
+
+        [HttpGet]
+        public PartialViewResult GetActiveCharacter()
+        {
+            return PartialView(ActiveCharacter);
         }
 
         public ActionResult Contact()

@@ -1,4 +1,5 @@
 ﻿using EoraMarketpalce.Web.Common.Constants;
+using EoraMarketpalce.Web.Models.Characters;
 using EoraMarketplace.Data.Domain.Characters;
 using Microsoft.AspNet.Identity;
 using System;
@@ -11,12 +12,12 @@ namespace EoraMarketpalce.Web.Controllers.Base
         /// <summary>
         ///     Get or set active user character stored in session
         /// </summary>
-        public Character ActiveCharacter
+        public CharacterInfoViewModel ActiveCharacter
         {
             get {
                 if(Session[AppConsts.CHARACTER_STORE_NAME] == null)
                     return null;
-                return Session[AppConsts.CHARACTER_STORE_NAME] as Character;
+                return Session[AppConsts.CHARACTER_STORE_NAME] as CharacterInfoViewModel;
             }
             set {
                 Session[AppConsts.CHARACTER_STORE_NAME] = value;

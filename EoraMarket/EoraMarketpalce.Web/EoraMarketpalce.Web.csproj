@@ -231,6 +231,7 @@
     <Compile Include="Models\Auth\SignUpViewModel.cs" />
     <Compile Include="Common\Identity\EoraSignInManager.cs" />
     <Compile Include="Common\Identity\EoraUserManager.cs" />
+    <Compile Include="Models\Characters\CharacterInfoViewModel.cs" />
     <Compile Include="Models\Characters\CharaktersViewModel.cs" />
     <Compile Include="Models\Characters\CreateCharacterVM.cs" />
     <Compile Include="Models\Goods\ProductModel.cs" />
@@ -423,6 +424,7 @@
     <Content Include="Views\Character\Create.cshtml" />
     <Content Include="Views\Shared\_Account.cshtml" />
     <Content Include="Views\Shop\Index.cshtml" />
+    <Content Include="Views\Shared\GetActiveCharacter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

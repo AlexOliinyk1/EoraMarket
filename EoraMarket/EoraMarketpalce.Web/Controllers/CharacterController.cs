@@ -41,8 +41,16 @@ namespace EoraMarketpalce.Web.Controllers
         public ActionResult SelectCharacter(int characterId)
         {
             int userId = User.Identity.GetUserId<int>();
+            var character = _characterService.GetUserCharacter(userId, characterId, true);
 
-            ActiveCharacter = _characterService.GetUserCharacter(userId, characterId);
+            ActiveCharacter = new CharacterInfoViewModel {
+                Id = character.Id,
+                Name = character.Name,
+                Class = character.Class.Name,
+                Race = character.Race.Name,
+                Credits = character.Credits,
+                ImageUrl = character.Avatar.ImageUrl
+            };
 
             return RedirectToAction("Index", "Shop");
         }

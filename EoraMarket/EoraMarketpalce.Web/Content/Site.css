@@ -21,3 +21,40 @@
     border-style: inset;
     border-width: 5px;
 }
+
+
+.character-info {
+    margin-top: -20px;
+    margin-bottom: 0;
+    min-height:50px;
+    width: 200px;
+    color: #FFFFFF;
+    background: #333;
+}
+
+    .character-info .char-photo img {
+        position: absolute;
+        margin: 10px;
+        float: left;
+        max-width: 50px;
+        height: 60px;
+        border-radius: 50%;
+    }
+
+    .character-info .char-name {
+        padding-top: 16px;
+        padding-left: 70px;
+        font-size: 1.2em;
+        text-align: left;
+    }
+
+    .character-info .char-detail {
+        padding-left: 70px;
+        margin-top: -14px;
+        font-size: 0.8em;
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    .character-info p {
+        margin-bottom: 0;
+    }

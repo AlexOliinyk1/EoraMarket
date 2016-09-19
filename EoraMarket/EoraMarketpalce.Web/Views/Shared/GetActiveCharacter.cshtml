@@ -1,0 +1,18 @@
+﻿@using EoraMarketpalce.Web.Common.Extentions;
+@model EoraMarketpalce.Web.Models.Characters.CharacterInfoViewModel
+@{
+    ViewBag.Title = "GetActiveCharacter";
+}
+@{if(User.IsUser() && Model != null)
+    {
+        <div class="character-info">
+            <div class="char-header">
+                <div class="char-photo">
+                    <img src="@Model.ImageUrl">
+                </div>
+                <h3 class="char-name">@Model.Name</h3>
+                <p class="char-detail">(@Model.Race / @Model.Class)</p>
+            </div>
+        </div>
+    }
+}

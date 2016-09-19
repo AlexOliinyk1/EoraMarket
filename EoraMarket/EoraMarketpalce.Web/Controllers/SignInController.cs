@@ -68,9 +68,6 @@ namespace EoraMarketpalce.Web.Controllers
 
             var result = await SignInManager.PasswordSignInAsync(login.Email, login.Password, login.RememberMe, shouldLockout: false);
 
-
-
-
             switch(result)
             {
                 case SignInStatus.Success:
@@ -92,6 +89,7 @@ namespace EoraMarketpalce.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<RedirectToRouteResult> SignOut()
         {
+            ActiveCharacter = null;
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
 
             return RedirectToAction("Index", "Home");
