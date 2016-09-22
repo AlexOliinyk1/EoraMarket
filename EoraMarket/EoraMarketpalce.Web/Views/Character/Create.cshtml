@@ -59,6 +59,6 @@
                             }
     </div>
     <div class="col-md-6" data-bind="foreach:availableAvatars">
-        <img height="250" data-bind="attr: {src:ImageUrl, alt:Id}, click: $root.selectAvatar(Id), css:{'active-image': $data.Id==$root.selectedImageId()}" />
+        <img height="250" data-bind="attr: {src:ImageUrl, alt:Id}, click: $root.selectAvatar, css:{'active-image': $data.Id==$root.selectedImageId()}" />
     </div>
 </div>

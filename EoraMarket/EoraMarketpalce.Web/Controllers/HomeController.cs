@@ -36,13 +36,6 @@ namespace EoraMarketpalce.Web.Controllers
             return View();
         }
 
-        [HttpGet]
-        [Authorize]
-        public PartialViewResult GetActiveCharacter()
-        {
-            return PartialView(ActiveCharacter);
-        }
-
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

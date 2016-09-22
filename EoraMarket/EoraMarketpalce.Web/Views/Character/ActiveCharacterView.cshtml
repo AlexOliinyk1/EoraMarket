@@ -8,7 +8,14 @@
         <div class="character-info">
             <div class="char-header">
                 <div class="char-photo">
-                    <img src="@Model.ImageUrl">
+                    @if(Model.ImageUrl != null)
+                    {
+                        <img src="@Html.UrlToHtmlValid(Model.ImageUrl)">
+                    }
+                    else
+                    {
+                        <img src="~/Content/Images/no-image.png" />
+                    }
                 </div>
                 <h3 class="char-name">@Model.Name</h3>
                 <p class="char-detail">(@Model.Race / @Model.Class)</p>

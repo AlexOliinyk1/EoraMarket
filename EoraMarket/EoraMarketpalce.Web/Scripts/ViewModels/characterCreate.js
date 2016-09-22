@@ -7,13 +7,17 @@
 
     self.loadAvatarsForRace = function (raceId) {
         $.get("/Character/GetAvatarsByRace", { raceId: raceId }).success(function (result) {
-            self.availableAvatars(result);
+            self.availableAvatars([]);
+            $.each(result, function (index, item) {
+                item.ImageUrl = item.ImageUrl.replace("~", "");
+                self.availableAvatars.push(item);
+            })
             self.selectedImageId("");
         });
     };
 
-    self.selectAvatar = function (imageId) {
-        self.selectedImageId(imageId);
+    self.selectAvatar = function (image) {
+        self.selectedImageId(image.Id);
     };
 
     self.init = function () {

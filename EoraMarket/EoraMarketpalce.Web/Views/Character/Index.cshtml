@@ -1,4 +1,5 @@
-﻿@using EoraMarketplace.Data.Domain.Characters;
+﻿@using EoraMarketplace.Data.Domain.Characters
+@using EoraMarketpalce.Web.Common.Extentions
 @model EoraMarketpalce.Web.Models.Characters.CharactersVM
 @{
     ViewBag.Title = "Characters";
@@ -24,7 +25,7 @@
         @{
             foreach(Character item in Model.Characters)
             {
-                <div id="@item.Id" class="character card" style="background: url('@item.Avatar.ImageUrl') no-repeat; background-size: cover;">
+                <div id="@item.Id" class="character card" style="background: url('@Html.UrlToHtmlValid(item.Avatar.ImageUrl)') no-repeat; background-size: cover;">
                     <div class="options btn-group">
                         @Html.ActionLink("View", "View", "Character", null, new { @class = "btn btn-default btn-xs" })
                         @Html.ActionLink("Select", "SelectCharacter", "Character", new { characterId = item.Id }, new { @class = "btn btn-success btn-xs" })

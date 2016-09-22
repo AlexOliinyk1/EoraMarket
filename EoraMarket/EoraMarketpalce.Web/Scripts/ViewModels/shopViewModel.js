@@ -73,8 +73,6 @@
         getUserCharacter().always(function () {
             loadGoods();
         });
-
-
     };
 
     self.uiFilter.productName.subscribe(function (newValue, oldValue) {

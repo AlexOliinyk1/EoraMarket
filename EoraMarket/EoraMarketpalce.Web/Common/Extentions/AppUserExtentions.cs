@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace EoraMarketpalce.Web.Common.Extentions
 {
@@ -27,6 +28,11 @@ namespace EoraMarketpalce.Web.Common.Extentions
         public static bool IsUser(this IPrincipal identity)
         {
             return identity.IsInRole(AppConsts.UserRoleName);
+        }
+
+        public static string UrlToHtmlValid(this HtmlHelper htmlHelper, string originUrl)
+        {
+            return originUrl.Replace("~", "");
         }
     }
 }
