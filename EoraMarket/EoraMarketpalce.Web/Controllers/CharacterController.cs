@@ -60,10 +60,9 @@ namespace EoraMarketpalce.Web.Controllers
             return View(new Character());
         }
 
-        [HttpGet]
         public JsonResult GetActiveCharacter()
         {
-            return Json(ActiveCharacter);
+            return Json(ActiveCharacter, JsonRequestBehavior.AllowGet);
         }
 
         [Authorize]

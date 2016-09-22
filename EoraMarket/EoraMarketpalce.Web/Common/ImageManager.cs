@@ -8,7 +8,7 @@ using System.Web.Hosting;
 
 namespace EoraMarketpalce.Web.Common
 {
-    public class ImageSaver
+    public class ImageManager
     {
         private const string FULL_PATH_DIVIDER = "//";
         private const string REL_PATH_DIVIDER = "\\";
@@ -22,15 +22,15 @@ namespace EoraMarketpalce.Web.Common
         /// <summary>
         ///     Ctor.
         /// </summary>
-        public ImageSaver()
+        public ImageManager()
         {
             _rootPath = HostingEnvironment.MapPath("/");
             _imageRootPath = Path.Combine(_rootPath, CONTENT_ROOT_PATH, IMAGES_ROOT_PATH, PRODUCTS_IMAGES_ROOT_PATH);
         }
 
-        public static ImageSaver GetSaverInstance()
+        public static ImageManager GetSaverInstance()
         {
-            return Activator.CreateInstance<ImageSaver>();
+            return Activator.CreateInstance<ImageManager>();
         }
 
         public static string ToFullPath(string relativePath)
@@ -57,6 +57,11 @@ namespace EoraMarketpalce.Web.Common
             return fullPath;
         }
 
+        public static string UrlToHtmlValid(string virtpath)
+        {
+            return virtpath.Replace("~", "");
+        }
+
         public string SaveImage(string base64data)
         {
             Image image = ReadImage(base64data);
@@ -67,7 +72,7 @@ namespace EoraMarketpalce.Web.Common
 
             try
             {
-                image.Save(imagePath, System.Drawing.Imaging.ImageFormat.Png);
+                image.Save(imagePath, image.RawFormat);
             }
             catch(Exception exc)
             {

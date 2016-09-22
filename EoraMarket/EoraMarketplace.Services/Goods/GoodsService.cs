@@ -4,6 +4,7 @@ using EoraMarketplace.DataAccess.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core;
 using System.Linq;
 
 namespace EoraMarketplace.Services.Goods
@@ -12,16 +13,19 @@ namespace EoraMarketplace.Services.Goods
     {
         private readonly IRepository<MarketProduct> _goodsRepository;
         private readonly IRepository<Class> _classRepository;
+        private readonly IRepository<Character> _characterRepository;
 
         /// <summary>
         ///     Ctor.
         /// </summary>
         /// <param name="goodsRepository"></param>
         /// <param name="classRepository"></param>
-        public GoodsService(IRepository<MarketProduct> goodsRepository, IRepository<Class> classRepository)
+        /// <param name="charRepo"></param>
+        public GoodsService(IRepository<MarketProduct> goodsRepository, IRepository<Class> classRepository, IRepository<Character> charRepo)
         {
             this._goodsRepository = goodsRepository;
             this._classRepository = classRepository;
+            this._characterRepository = charRepo;
         }
 
         public List<MarketProduct> GetGoods(Class forClass, string searchName, int? minPrice, int? maxPrice, int skip, int take)
@@ -53,6 +57,8 @@ namespace EoraMarketplace.Services.Goods
 
             var ids = classes.Select(c => c.Id).ToArray();
             mProduct.Product.Classes = _classRepository.Table.Where(x => ids.Any(c => c == x.Id)).ToList();
+
+            mProduct.Product.Stats = stats;
 
             mProduct = _goodsRepository.Insert(mProduct);
 
@@ -86,9 +92,38 @@ namespace EoraMarketplace.Services.Goods
             return GetFilteredQuery(null, searchName, minPrice, maxPrice).Count();
         }
 
+        public void BuyProductByCharacter(int userId, int charId, int prodId)
+        {
+            Character character = _characterRepository.Table.Where(x => x.Id == charId && x.OwnerId == userId)
+                .Include(x => x.Inventory)
+                .FirstOrDefault();
+
+            if(character == null)
+                throw new ObjectNotFoundException("Character not found");
+
+            Product product = _goodsRepository.Table.Where(x => x.ProductId == prodId)
+                .Select(x => x.Product)
+                .FirstOrDefault();
+
+            if(product == null)
+                throw new ObjectNotFoundException("Product not found");
+
+            if(character.Credits < product.Price)
+                throw new Exception("Insufficient funds");
+
+            character.Inventory.Add(product);
+            character.Credits = character.Credits - product.Price;
+
+            character = _characterRepository.Update(character);
+        }
+
         private IQueryable<MarketProduct> GetFilteredQuery(Class forClass, string searchName, int? minPrice, int? maxPrice)
         {
             IQueryable<MarketProduct> query = _goodsRepository.Table;
+
+            query = query.Where(x => x.Product.Classes.Count() == 0);
+
+            var d = query.Count();
 
             if(forClass != null)
                 query = query.Where(x => x.Product.Classes.Any(c => c.Name == forClass.Name));
@@ -104,5 +139,6 @@ namespace EoraMarketplace.Services.Goods
 
             return query;
         }
+
     }
 }

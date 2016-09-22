@@ -216,7 +216,7 @@
     <Compile Include="Common\Constants\AppConsts.cs" />
     <Compile Include="Common\Extentions\AppUserExtentions.cs" />
     <Compile Include="Common\Filters\AccessAuthorizeAttribute.cs" />
-    <Compile Include="Common\ImageSaver.cs" />
+    <Compile Include="Common\ImageManager.cs" />
     <Compile Include="Common\Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Controllers\Base\AppController.cs" />
     <Compile Include="Controllers\CharacterController.cs" />
@@ -235,6 +235,7 @@
     <Compile Include="Models\Characters\CharacterInfoViewModel.cs" />
     <Compile Include="Models\Characters\CharaktersViewModel.cs" />
     <Compile Include="Models\Characters\CreateCharacterVM.cs" />
+    <Compile Include="Models\Goods\BuyModel.cs" />
     <Compile Include="Models\Goods\CreateProductModel.cs" />
     <Compile Include="Models\Goods\GoodsFilter.cs" />
     <Compile Include="Models\Goods\GoodsPagingModel.cs" />

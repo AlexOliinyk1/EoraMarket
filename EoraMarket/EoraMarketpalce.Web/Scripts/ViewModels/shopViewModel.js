@@ -3,12 +3,10 @@
 
     self.TotalResults = ko.observable();
     self.Pager = ko.pager(self.TotalResults);
-
-    self.Pager().CurrentPage.subscribe(function () {
-        loadGoods();
-    });
-
     self.goods = ko.observableArray([]);
+
+    self.detail = ko.observable({});
+    self.character = {};
 
     self.uiFilter = {
         productName: ko.observable('').extend({ throttle: 30 }),
@@ -17,11 +15,6 @@
         activeClass: ko.observable()
     };
 
-    self.selectItemCallback = function (data) {
-        console.log(data);
-    }
-
-    self.detail = ko.observable({});
     self.previewProduct = function (product) {
         $.get("/api/Goods/Detail/" + product.id).success(function (result) {
             self.detail(result);
@@ -37,8 +30,19 @@
             loadGoods();
         }
     };
+    self.buyProduct = function (product, htmlElement) {
+        if (self.character.Name != undefined) {
+            $.post("/api/Goods/BuyProduct", { CharId: self.character.Id, ProdId: product.id }).success(function (result) {
+                console.log(result);
+
+            }).fail(function (result) {
+                console.log(result);
+            });
+        }
+    };
 
     function loadGoods() {
+        var userClass = self.character ? { name: self.character.Class } : null;
         $.get("/api/Goods", {
             filter: {
                 productName: self.uiFilter.productName,
@@ -46,7 +50,7 @@
                 maxPrice: self.uiFilter.maxPrice,
                 page: self.Pager().CurrentPage(),
                 perPage: self.Pager().PageSize(),
-                activeClass: {},
+                activeClass: userClass,
             }
         }).success(function (result) {
             console.log(result);
@@ -61,8 +65,9 @@
     }
 
     function getUserCharacter() {
-        var q = $.get("/Charcter/GetActiveCharacter").success(function (result) {
+        var q = $.get("/Character/GetActiveCharacter").success(function (result) {
             console.log(result);
+            self.character = result;
         }).fail(function (result) {
             console.log(result);
         });
@@ -78,6 +83,9 @@
     self.uiFilter.productName.subscribe(function (newValue, oldValue) {
 
     });
+    self.Pager().CurrentPage.subscribe(function () {
+        loadGoods();
+    });
 }
 
 $(document).ready(function () {
@@ -85,5 +93,4 @@ $(document).ready(function () {
     vm.init();
     ko.applyBindings(vm);
 });
-
 

@@ -82,6 +82,10 @@
     <Compile Include="Migrations\201609211247079_changeRelProdClass.Designer.cs">
       <DependentUpon>201609211247079_changeRelProdClass.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609221724493_producCharRel.cs" />
+    <Compile Include="Migrations\201609221724493_producCharRel.Designer.cs">
+      <DependentUpon>201609221724493_producCharRel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IRepository.cs" />
@@ -105,6 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609211247079_changeRelProdClass.resx">
       <DependentUpon>201609211247079_changeRelProdClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609221724493_producCharRel.resx">
+      <DependentUpon>201609221724493_producCharRel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

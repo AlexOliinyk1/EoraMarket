@@ -24,5 +24,7 @@ namespace EoraMarketplace.Data.Domain.Goods
 
         public List<ProductStat> Stats { get; set; }
         public List<Class> Classes { get; set; }
+
+        public List<Character> Owners { get; set; }
     }
 }

@@ -32,7 +32,7 @@ namespace EoraMarketpalce.Web.Common.Extentions
 
         public static string UrlToHtmlValid(this HtmlHelper htmlHelper, string originUrl)
         {
-            return originUrl.Replace("~", "");
+            return ImageManager.UrlToHtmlValid(originUrl);
         }
     }
 }

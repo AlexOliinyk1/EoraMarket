@@ -8,14 +8,10 @@ using EoraMarketplace.Services.Goods;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Description;
 
 namespace EoraMarketpalce.Web.Controllers
 {
@@ -62,7 +58,11 @@ namespace EoraMarketpalce.Web.Controllers
         [Route("api/Goods/Detail/{id}")]
         public MarketProduct GetDetail([FromUri]int id)
         {
-            return _goodsService.GetProductDetail(id);
+            MarketProduct product = _goodsService.GetProductDetail(id);
+
+            product.Product.Image.ImageUrl = ImageManager.UrlToHtmlValid(product.Product.Image.ImageUrl);
+
+            return product;
         }
 
         [HttpGet]
@@ -77,7 +77,7 @@ namespace EoraMarketpalce.Web.Controllers
         [Route("api/Goods/SaveProduct")]
         public HttpResponseMessage SaveProduct(CreateProductModel model)
         {
-            ImageSaver saver = ImageSaver.GetSaverInstance();
+            ImageManager saver = ImageManager.GetSaverInstance();
 
             string imagePath = saver.SaveImage(model.Image);
 
@@ -87,13 +87,33 @@ namespace EoraMarketpalce.Web.Controllers
                 TypeId = model.TypeId,
                 Image = new EoraMarketplace.Data.Domain.Images.Picture {
                     IsAvatar = false,
-                    ImageUrl = ImageSaver.ToVirtualPath(imagePath)
+                    ImageUrl = ImageManager.ToVirtualPath(imagePath)
                 },
             };
 
             _goodsService.CreateProduct(product, model.Classes, model.Stats);
 
             return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+        }
+
+        [HttpPost]
+        [Route("api/Goods/BuyProduct")]
+        public HttpResponseMessage BuyProduct([FromBody]BuyModel buy)
+        {
+            if(RequestContext.Principal.IsAdmin())
+                return new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
+
+            int userId = RequestContext.Principal.Identity.GetUserId<int>();
+
+            try
+            {
+                _goodsService.BuyProductByCharacter(userId, buy.CharId, buy.ProdId);
+                return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+            }
+            catch(System.Exception exc)
+            {
+                return Request.CreateResponse(System.Net.HttpStatusCode.BadRequest, exc.Message);
+            }
         }
 
         [HttpGet]
