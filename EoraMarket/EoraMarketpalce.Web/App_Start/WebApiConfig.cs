@@ -1,4 +1,6 @@
-﻿using System.Web.Http;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System.Web.Http;
 
 namespace EoraMarketpalce.Web
 {
@@ -13,9 +15,11 @@ namespace EoraMarketpalce.Web
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            
+            var jsonFormater = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
 
-            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ContractResolver =
-                new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
+            jsonFormater.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            jsonFormater.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
         }
     }
 }

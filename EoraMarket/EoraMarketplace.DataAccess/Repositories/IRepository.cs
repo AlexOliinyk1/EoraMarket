@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace EoraMarketplace.DataAccess.Repositories
@@ -23,18 +24,18 @@ namespace EoraMarketplace.DataAccess.Repositories
         /// </summary>
         /// <param name="entity">Entity</param>
         TEntity Update(TEntity entity);
-        
+
         /// <summary>
         /// Delete entity
         /// </summary>
         /// <param name="entity">Entity</param>
         void Delete(TEntity entity);
-        
+
         /// <summary>
         /// Gets a table
         /// </summary>
         IQueryable<TEntity> Table { get; }
-
+        
         /// <summary>
         /// Gets a table with "no tracking" enabled (EF feature) Use it only when you load record(s) only for read-only operations
         /// </summary>

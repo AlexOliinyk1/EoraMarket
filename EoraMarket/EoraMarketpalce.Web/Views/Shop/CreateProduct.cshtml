@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "CreateProduct";
+}
+@section scripts{
+    <script src="~/Scripts/ViewModels/createProductViewModel.js"></script>
+}
+<h2>Create Product</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <button type="button" class="btn btn-success" data-bind="click:startCreate, enable: !inProgress()">Create</button>
+            @Html.ActionLink("Cancel", "", "Shop", null, new { @class = "btn btn-danger", data_bind = "enable: !inProgress()" })
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label for="email" class="col-md-3 control-label">Product Name:</label>
+                <div class="col-md-9">
+                    <input id="email" type="text" class="form-control" data-bind="value:model.product.name"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label for="price" class="col-md-3 control-label">Price:</label>
+                <div class="col-md-9">
+                    <input id="price" type="number" class="form-control" data-bind="value:model.product.price"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-md-3 control-label">Image:</label>
+                <div class="col-md-9">
+                    <input id="pic" type="file" class="form-control" accept="image/*" data-bind="event: { change: function() { changeImage($element.files[0]) } }" />
+                    <img id="prev" src="" width="200" alt="image" data-bind="attr:{src:model.product.image()},css:{'hidden': model.product.image().length==0}" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        Select classes:
+        <div data-bind="foreach: model.product.classes">
+            <div class="checkbox">
+                <input type="checkbox" value="" data-bind="checked:checked,attr:{id:data.id}">
+                <label data-bind="text:data.name, attr:{for:data.id}"></label>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        Stats:<button class="btn btn-sm" data-bind="click:addStat">Add</button>
+
+        <ul class="list-group" data-bind="foreach:model.product.stats">
+            <li class="list-group-item">
+                <div class="row">
+                    <label class="col-md-2">Name:</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" data-bind="value:statName" />
+                    </div>
+                    <label class="col-md-2">Value:</label>
+                    <div class="col-md-3">
+                        <input type="number" class="form-control" data-bind="value:statValue" />
+                    </div>
+                    <button class="col-md-1 btn btn-sm btn-danger" data-bind="click:$root.removeStat">X</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

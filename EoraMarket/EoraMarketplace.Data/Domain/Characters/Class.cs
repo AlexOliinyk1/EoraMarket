@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using EoraMarketplace.Data.Domain.Goods;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace EoraMarketplace.Data.Domain.Characters
 {
@@ -8,5 +10,7 @@ namespace EoraMarketplace.Data.Domain.Characters
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+
+        public ICollection<Product> Products { get; set; }
     }
 }

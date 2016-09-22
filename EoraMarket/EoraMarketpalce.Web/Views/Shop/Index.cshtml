@@ -1,32 +1,180 @@
-﻿@{
+﻿@using EoraMarketpalce.Web.Common.Extentions
+@{
     ViewBag.Title = "Shop";
 }
 @section scripts{
     @Scripts.Render("~/Scripts/ViewModels/shopViewModel.js")
+    @Scripts.Render("~/Scripts/ko.pager.js")
+
 }
 @section styles{
-    <link href="~/Content/ShopStyles.css" rel="stylesheet" />
+    @Styles.Render("~/Content/ShopStyles.css")
 }
 <h2>Shop</h2>
+<div>
 
-<div id="productContainer" class="row">
-    <div class="col-md-3">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#buy" aria-controls="buy" role="tab" data-toggle="tab">Buy</a></li>
+        <li role="presentation"><a href="#sell" aria-controls="sell" role="tab" data-toggle="tab">Sell</a></li>
+    </ul>
 
-    </div>
-    <div class="col-md-9" data-bind="foreach: goods">
-        <div class="productCard">
-            @*<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample57.jpg" alt="sample57" />*@
-            <img data-bind="attr:{src: $data.imageUrl, alt: $data.name}" />
-            <div>
-                <h3 id="prodName" data-bind="text: $data.name"></h3>
-                <p id="prodDescription" data-bind="text: $data.description"></p>
-                <div class="price">
-                    <span id="prodPrice" data-bind="text: $data.price">19.00</span>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="buy">
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Saerch Name</label>
+                                    <div class="col-md-9">
+                                        <input class="form-control" data-bind="textInput :uiFilter.productName" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Min Price</label>
+                                    <div class="col-md-9">
+                                        <input class="form-control" data-bind="value:uiFilter.minPrice" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Max Price</label>
+                                    <div class="col-md-9">
+                                        <input class="form-control" data-bind="value:uiFilter.maxPrice" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-7">
+                                        @{ if(User.IsAdmin())
+                                            {
+                                                @Html.ActionLink("Create Product", "CreateProduct", "Shop", null, new { @class = "btn btn-info" })
+                                            }
+                                        }
+                                    </div>
+                                    <div class="col-md-5 left">
+                                        <button class="btn btn-info" data-bind="click:applyFilters">Apply filters</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!--ko foreach: goods-->
+                        <li class="list-group-item" data-bind="click:$root.previewProduct">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <img height="70" data-bind="attr:{src:imageUrl, alt:name}" />
+                                </div>
+                                <div class="col-md-7">
+                                    <span data-bind="text:name"></span>
+                                </div>
+                            </div>
+                        </li>
+                        <!--/ko-->
+                    </ul>
+
+                    <!-- ko if:Pager().TotalItemCount() > 0 -->
+                    <div data-bind="template:{ name: 'tpl-pager', data: Pager }">
+                    </div>
+                    <!-- /ko -->
+
+                </div>
+                <div class="col-md-6">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title" data-bind="text:detail().product.name"></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img width="200" data-bind="attr:{src:detail().image.imageUrl}" />
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-            <a href="#"><i class="ion-android-cart"></i></a>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="sell">
+            Sell
         </div>
     </div>
-</div>
-@*<button onclick="vm.callApi()">Click me</button>*@
 
+</div>
+
+<script type="text/html" id="tpl-pager">
+    <div class="pagexofx">
+        <span data-bind="text: FirstItemIndex"></span>
+        -
+        <span data-bind="text: LastItemIndex"></span>
+        of
+        <strong>
+            <span data-bind="text: TotalItemCount"></span>
+        </strong>
+        total results.
+    </div>
+    <ul class="pagination">
+        <!-- ko if:CurrentPage() === 1 -->
+        <li class="disabled">
+            <a href="#" class="disabledPage">&laquo;&laquo;</a>
+        </li>
+        <!-- /ko -->
+        <!-- ko ifnot:CurrentPage() === 1 -->
+        <li>
+            <a href="#" data-bind="click: function(){ selectPage(1); }">&laquo;&laquo;</a>
+        </li>
+        <!-- /ko -->
+        <!-- ko if:HasPrevPage -->
+        <li>
+            <a href="#" data-bind="click: function(){ selectPage(CurrentPage() - 1); }">&laquo;</a>
+        </li>
+        <!-- /ko -->
+        <!-- ko ifnot:HasPrevPage -->
+        <li class="disabled">
+            <a href="#" class="disabledPage">&laquo;</a>
+        </li>
+        <!-- /ko -->
+        <!-- ko foreach:Pages -->
+        <!-- ko if:$data === $parent.CurrentPage() -->
+        <li class="active">
+            <span class="currentPage" data-bind="text: $data"></span>
+        </li>
+        <!-- /ko -->
+        <!-- ko if:$data !== $parent.CurrentPage() -->
+        <li>
+            <a href="#" data-bind="text: $data, click: function(){ $parent.selectPage($data); }"></a>
+        </li>
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko if:HasNextPage -->
+        <li>
+            <a href="#" data-bind="click: function(){ selectPage(CurrentPage() + 1); }">&raquo;</a>
+        </li>
+        <!-- /ko -->
+        <!-- ko ifnot:HasNextPage -->
+        <li class="disabled">
+            <a href="#" class="disabledPage">&raquo;</a>
+        </li>
+        <!-- /ko -->
+        <!-- ko ifnot:CurrentPage() === LastPage() -->
+        <li>
+            <a href="#" data-bind="click: function(){ selectPage(LastPage()); }">&raquo;&raquo;</a>
+        </li>
+        <!-- /ko -->
+        <!-- ko if:CurrentPage() === LastPage() -->
+        <li class="disabled">
+            <a href="#" class="disabledPage">&raquo;&raquo;</a>
+        </li>
+        <!-- /ko -->
+    </ul>
+</script>

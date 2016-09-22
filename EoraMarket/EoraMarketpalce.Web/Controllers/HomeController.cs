@@ -37,6 +37,7 @@ namespace EoraMarketpalce.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public PartialViewResult GetActiveCharacter()
         {
             return PartialView(ActiveCharacter);

@@ -20,7 +20,7 @@ namespace EoraMarketplace.DataAccess.Repositories
                 return this._entities;
             }
         }
-
+        
         public IQueryable<TEntity> TableNoTracking
         {
             get {

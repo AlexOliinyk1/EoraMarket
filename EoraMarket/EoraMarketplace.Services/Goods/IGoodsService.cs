@@ -6,6 +6,12 @@ namespace EoraMarketplace.Services.Goods
 {
     public interface IGoodsService
     {
-        List<MarketProduct> GetGoods(Class forClass,int skip, int take);
+        MarketProduct GetProductDetail(int productId);
+        List<string> GetProductNames(string namePart);
+        List<MarketProduct> GetGoods(Class forClass, string searchName, int? minPrice, int? maxPrice, int skip, int take);
+        List<MarketProduct> GetGoods(string searchName, int? minPrice, int? maxPrice, int skip, int take);
+        int GetGoodsCount(Class forClass, string searchName, int? minPrice, int? maxPrice);
+        int GetGoodsCount(string searchName, int? minPrice, int? maxPrice);
+        MarketProduct CreateProduct(Product product, List<Class> classes, List<ProductStat> stats);
     }
 }

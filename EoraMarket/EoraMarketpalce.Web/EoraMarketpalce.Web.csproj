@@ -216,6 +216,7 @@
     <Compile Include="Common\Constants\AppConsts.cs" />
     <Compile Include="Common\Extentions\AppUserExtentions.cs" />
     <Compile Include="Common\Filters\AccessAuthorizeAttribute.cs" />
+    <Compile Include="Common\ImageSaver.cs" />
     <Compile Include="Common\Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Controllers\Base\AppController.cs" />
     <Compile Include="Controllers\CharacterController.cs" />
@@ -234,6 +235,9 @@
     <Compile Include="Models\Characters\CharacterInfoViewModel.cs" />
     <Compile Include="Models\Characters\CharaktersViewModel.cs" />
     <Compile Include="Models\Characters\CreateCharacterVM.cs" />
+    <Compile Include="Models\Goods\CreateProductModel.cs" />
+    <Compile Include="Models\Goods\GoodsFilter.cs" />
+    <Compile Include="Models\Goods\GoodsPagingModel.cs" />
     <Compile Include="Models\Goods\ProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App_Start\Startup.cs" />
@@ -361,6 +365,7 @@
     <Content Include="Content\Images\player\Human\m\male_human_n_sm.png" />
     <Content Include="Content\Images\player\Human\m\male_human_o_lg.png" />
     <Content Include="Content\Images\player\Human\m\male_human_o_sm.png" />
+    <Content Include="Content\Images\no-image.png" />
     <Content Include="Content\ShopStyles.css" />
     <Content Include="Content\Test\male_human_p_lg.png" />
     <Content Include="Content\Images\player\Human\m\male_human_p_sm.png" />
@@ -397,11 +402,13 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-3.4.0.debug.js" />
     <Content Include="Scripts\knockout-3.4.0.js" />
+    <Content Include="Scripts\ko.pager.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\ViewModels\characterCreate.js" />
     <Content Include="Scripts\ViewModels\charakters.js" />
+    <Content Include="Scripts\ViewModels\createProductViewModel.js" />
     <Content Include="Scripts\ViewModels\shopViewModel.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
@@ -425,11 +432,13 @@
     <Content Include="Views\Shared\_Account.cshtml" />
     <Content Include="Views\Shop\Index.cshtml" />
     <Content Include="Views\Shared\GetActiveCharacter.cshtml" />
+    <Content Include="Views\Shop\CreateProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Common\Helpers\" />
+    <Folder Include="Content\Images\Products\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
