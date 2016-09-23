@@ -143,7 +143,7 @@ namespace EoraMarketplace.Services.Goods
 
         private IQueryable<MarketProduct> GetFilteredQuery(Class forClass, string searchName, int? minPrice, int? maxPrice)
         {
-            IQueryable<MarketProduct> query = _goodsRepository.Table;
+            IQueryable<MarketProduct> query = _goodsRepository.Table.Where(x => !x.IsDeleted);
 
             if(forClass != null)
                 query = query.Where(x => !x.Product.Classes.Any() || x.Product.Classes.Any(c => c.Name == forClass.Name));
@@ -170,6 +170,16 @@ namespace EoraMarketplace.Services.Goods
                 throw new ObjectNotFoundException("Character not found");
 
             return character;
+        }
+
+        public void deleteProduct(int productId)
+        {
+            MarketProduct mProduct = _goodsRepository.GetById(productId);
+
+            mProduct.IsDeleted = true;
+            mProduct.DeletedAt = DateTime.UtcNow;
+
+            mProduct = _goodsRepository.Update(mProduct);
         }
 
         private Product GetProduct(int prodId)

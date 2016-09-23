@@ -98,6 +98,10 @@
     <Compile Include="Migrations\201609230002098_addCharactersProducts.Designer.cs">
       <DependentUpon>201609230002098_addCharactersProducts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609230108448_addProductDeleteDate.cs" />
+    <Compile Include="Migrations\201609230108448_addProductDeleteDate.Designer.cs">
+      <DependentUpon>201609230108448_addProductDeleteDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IRepository.cs" />
@@ -133,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609230002098_addCharactersProducts.resx">
       <DependentUpon>201609230002098_addCharactersProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609230108448_addProductDeleteDate.resx">
+      <DependentUpon>201609230108448_addProductDeleteDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

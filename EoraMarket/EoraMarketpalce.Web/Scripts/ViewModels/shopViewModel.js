@@ -27,6 +27,28 @@
             self.detail(result);
         })
     };
+    self.delete = function (product) {
+        var apiUrl = "/api/Goods/{0}";
+        apiUrl = apiUrl.replace("{0}", product.id);
+
+        $.ajax({
+            url: apiUrl,
+            type: 'DELETE',
+            cache: false,
+            statusCode: {
+                200: function (data) {
+                    loadGoods();
+                },
+                404: function (data) {
+                    console.log(data);
+                },
+                400: function (data) {
+                    console.log(data);
+                }
+            }
+        });
+
+    }
 
     self.character = {};
     self.characterCredit = ko.observable(0);
@@ -38,11 +60,10 @@
         });
     };
 
-    //  BUY
-
     self.buyProduct = function (product, htmlElement) {
         if (self.character.Name !== undefined) {
             self.transferInProccess(true);
+
             $.post("/api/Goods/BuyProduct", {
                 CharId: self.character.Id,
                 ProdId: product.id
@@ -52,6 +73,7 @@
 
                     loadInventory(self.character.Id);
                     self.toSellDetail(false);
+                    self.transferInProccess(false);
                 });
             }).fail(function (result) {
                 self.transferInProccess(false);
@@ -60,17 +82,17 @@
         }
     };
 
-    //  SELL
-
     self.sellProduct = function (product, htmlElement) {
         if (self.character.Name !== undefined) {
             self.transferInProccess(true);
+
             $.post("/api/Goods/SellProduct", {
                 CharId: self.character.Id,
                 ProdId: product.id
             }).success(function (result) {
                 console.log(result);
                 loadInventory(self.character.Id);
+                self.transferInProccess(false);
                 //TODO: show message (popup)
             }).fail(function (result) {
                 console.log(result);
@@ -108,7 +130,6 @@
     }
     function getUserCharacter() {
         var q = $.get("/Character/GetActiveCharacter").success(function (result) {
-            console.log(result);
             self.character = result;
             self.characterCredit(self.character.Credits);
         }).fail(function (result) {

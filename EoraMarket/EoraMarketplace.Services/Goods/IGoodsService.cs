@@ -15,5 +15,6 @@ namespace EoraMarketplace.Services.Goods
         MarketProduct CreateProduct(Product product, List<Class> classes, List<ProductStat> stats);
         void BuyProductByCharacter(int userId, int charId, int prodId);
         void SellCharacterProduct(int userId, int charId, int prodId);
+        void deleteProduct(int productId);
     }
 }

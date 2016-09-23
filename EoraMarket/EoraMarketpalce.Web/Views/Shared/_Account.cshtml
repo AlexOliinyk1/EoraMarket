@@ -8,14 +8,17 @@
     }
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.Action("ActiveCharacterView", "Character")
+            @if(User.IsUser())
+            {
+                Html.Action("ActiveCharacterView", "Character");
+            }
         </li>
 
         <li>
             @{
                 if(User.IsAdmin())
                 {
-                    @Html.ActionLink(User.Identity.GetUserName(), "", "Shop", null, new { @class = "navbar-brand" })
+                    @Html.ActionLink(User.Identity.GetUserName(), "", "AdminPanel", new { area = "admin" }, new { @class = "navbar-brand" })
                 }
                 else
                 {

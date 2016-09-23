@@ -97,6 +97,22 @@ namespace EoraMarketpalce.Web.Controllers
             return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
         }
 
+        public HttpResponseMessage Delete([FromUri]int id)
+        {
+            if(!RequestContext.Principal.IsAdmin())
+                return Request.CreateResponse(System.Net.HttpStatusCode.Forbidden);
+
+            try
+            {
+                _goodsService.deleteProduct(id);
+                return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+            }
+            catch(System.Exception exc)
+            {
+                return Request.CreateResponse(System.Net.HttpStatusCode.BadRequest, exc.Message);
+            }
+        }
+
         [HttpPost]
         [Route("api/Goods/BuyProduct")]
         public HttpResponseMessage BuyProduct([FromBody]BuyModel buy)
