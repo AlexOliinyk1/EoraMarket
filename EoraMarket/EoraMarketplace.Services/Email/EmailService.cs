@@ -12,7 +12,7 @@ namespace EoraMarketplace.Services.Email
         public EmailService()
         {
             _client = new SmtpClient {
-                EnableSsl = false
+                EnableSsl = true
             };
         }
 
@@ -36,7 +36,6 @@ namespace EoraMarketplace.Services.Email
             }
             catch(Exception exc)
             {
-
             }
         }
 

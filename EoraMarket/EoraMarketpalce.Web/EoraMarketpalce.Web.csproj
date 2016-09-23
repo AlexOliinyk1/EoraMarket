@@ -229,6 +229,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Auth\ResetPasswordViewModel.cs" />
     <Compile Include="Models\Auth\SignInViewModel.cs" />
     <Compile Include="Models\Auth\SignUpViewModel.cs" />
     <Compile Include="Common\Identity\EoraSignInManager.cs" />
@@ -372,6 +373,8 @@
     <Content Include="Views\Shop\Index.cshtml" />
     <Content Include="Views\Character\ActiveCharacterView.cshtml" />
     <Content Include="Views\Shop\CreateProduct.cshtml" />
+    <Content Include="Views\SignIn\ResetPassword.cshtml" />
+    <Content Include="Views\SignIn\ResetPasswordConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

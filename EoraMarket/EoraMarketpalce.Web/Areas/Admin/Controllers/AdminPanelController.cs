@@ -47,27 +47,36 @@ namespace EoraMarketpalce.Web.Areas.Admin.Controllers
             if(ModelState.IsValid)
             {
                 User user = UserManager.FindByName(model.InvitedEmail);
+                bool canSend = false;
 
                 if(user == null)
                 {
                     user = new User { UserName = model.InvitedEmail, Email = model.InvitedEmail, EmailConfirmed = true };
                     IdentityResult result = await UserManager.CreateAsync(user);
+                    canSend = result.Succeeded;
 
-                    if(result.Succeeded)
+                    if(!canSend)
+                    {
+                        foreach(var error in result.Errors)
+                        {
+                            ModelState.AddModelError("", error);
+                        }
+                    }
+                }
+                else
+                    canSend = true;
+
+                if(canSend)
+                {
+                    try
                     {
                         await SendActivationMail(user);
                         return RedirectToAction("Index");
                     }
-
-                    foreach(var error in result.Errors)
+                    catch(System.Exception exc)
                     {
-                        ModelState.AddModelError("", error);
+                        ModelState.AddModelError("", exc.Message);
                     }
-                }
-                else
-                {
-                    await SendActivationMail(user);
-                    return RedirectToAction("Index");
                 }
             }
 
@@ -80,8 +89,8 @@ namespace EoraMarketpalce.Web.Areas.Admin.Controllers
 
             var callbackUrl = Url.Action(
                 "ResetPassword",
-                "Account",
-                new { userId = user.Id, code = code },
+                "SignIn",
+                new { userId = user.Id, code = code, area = "" },
                 protocol: Request.Url.Scheme);
 
             string body = @"<h4>Welcome to EoraMarketplace!</h4><p>To get started, please <a href="""
