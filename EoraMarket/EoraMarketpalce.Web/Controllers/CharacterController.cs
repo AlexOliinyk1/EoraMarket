@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 using EoraMarketpalce.Web.Models.Goods;
 using EoraMarketplace.Services.Stats;
 using System.Net;
+using System.Collections;
 
 namespace EoraMarketpalce.Web.Controllers
 {

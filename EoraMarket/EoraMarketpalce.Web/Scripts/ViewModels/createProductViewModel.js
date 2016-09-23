@@ -12,12 +12,15 @@
             typeId: ko.observable(""),
             classes: ko.observableArray([]),
             stats: ko.observableArray([])
+        },
+        validate: function () {
+            this.product
         }
     };
 
     self.addStat = function () {
         var lastIndex = self.model.product.stats().length - 1;
-        var id = lastIndex < 0 ? 0 : self.model.product.stats()[lastIndex].id + 1;
+        var id = lastIndex < 0 ? 0 : self.model.product.stats()[lastIndex].index + 1;
         self.model.product.stats.push({
             index: id,
             statName: ko.observable(""),
@@ -34,7 +37,9 @@
 
     self.startCreate = function () {
         self.inProgress(true);
-        
+
+        //var foo = $('#productCreating').validate();
+
         var data = {
             name: self.model.product.name(),
             price: self.model.product.price(),
@@ -50,6 +55,20 @@
             location.href = "/Shop";
         }).fail(function (result) {
             console.log(result);
+            var errorMessage = result.responseJSON.message ? result.responseJSON.message : result.responseJSON;
+            
+            $.notify({
+                // options
+                icon: 'glyphicon glyphicon-warning-sign',
+                message: errorMessage
+            }, {
+                // settings
+                type: 'danger',
+                placement: {
+                    from: "top",
+                    align: "center"
+                }
+            });
         }).always(function () {
             self.inProgress(false);
         });
@@ -80,6 +99,10 @@
 
         self.model.product.name;
     };
+
+    function validateProduct() {
+
+    }
 
     function getSelectedClasses() {
         var classesModels = self.model.product.classes();

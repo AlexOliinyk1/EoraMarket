@@ -77,6 +77,9 @@ namespace EoraMarketpalce.Web.Controllers
         [Route("api/Goods/SaveProduct")]
         public HttpResponseMessage SaveProduct(CreateProductModel model)
         {
+            if(!ModelState.IsValid)
+                return Request.CreateErrorResponse(System.Net.HttpStatusCode.BadRequest, ModelState);
+
             ImageManager saver = ImageManager.GetSaverInstance();
 
             string imagePath = saver.SaveImage(model.Image);

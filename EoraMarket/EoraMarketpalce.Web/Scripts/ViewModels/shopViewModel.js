@@ -152,8 +152,6 @@
         var q = $.get("/Character/GetActiveCharacter").success(function (result) {
             self.character = result;
             self.characterCredit(self.character.Credits);
-        }).fail(function (result) {
-            showErrorMessage(result);
         });
         return q;
     }

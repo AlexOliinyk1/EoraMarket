@@ -2,6 +2,7 @@
 using EoraMarketplace.Data.Domain.Characters;
 using EoraMarketplace.Data.Domain.Goods;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace EoraMarketpalce.Web.Models.Goods
 {
@@ -11,12 +12,16 @@ namespace EoraMarketpalce.Web.Models.Goods
 
         public int Discount { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
+        [Required]
         public int Price { get; set; }
 
+        [Required]
         public int SellPrice { get; set; }
 
+        [Required]
         public string Image { get; set; }
 
         public int TypeId { get; set; }
