@@ -62,7 +62,7 @@
                                 <div class="col-md-3" data-bind="click:$root.previewProduct">
                                     <img height="70" data-bind="attr:{src:imageUrl, alt:name}" />
                                 </div>
-                                <div class="col-md-6" data-bind="click:$root.previewProduct">
+                                <div class="col-md-7" data-bind="click:$root.previewProduct">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <label data-bind="text:name"></label>
@@ -79,8 +79,7 @@
                                 <div class="col-md-1">
                                     @{if(User.IsAdmin())
                                         {
-
-                                            <button class="btn btn-danger" data-bind="click:$root.delete">X</button>
+                                            <button class="btn btn-danger pull-left" data-bind="click:$root.delete">X</button>
                                         }
                                     }
                                 </div>

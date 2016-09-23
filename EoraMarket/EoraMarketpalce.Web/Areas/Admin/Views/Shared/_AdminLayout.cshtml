@@ -1,7 +1,22 @@
-﻿@{ 
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="">
-    @RenderBody()
-</div>
+
+<nav class="navbar navbar-default admin-navbar">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <span class="navbar-brand">
+                Admin
+            </span>
+            @Html.ActionLink("Invite New Admin", "InviteAdmin", "AdminPanel", null, new { @class = "btn btn-default navbar-btn" })
+        </div>
+    </div>
+</nav>
+<ul class="list-group">
+    <li class="list-group-item">
+        @RenderBody()
+    </li>
+</ul>
+
+

@@ -213,6 +213,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminPanelController.cs" />
+    <Compile Include="Areas\Admin\Models\AdminInviteModel.cs" />
     <Compile Include="Common\Constants\AppConsts.cs" />
     <Compile Include="Common\Extentions\AppUserExtentions.cs" />
     <Compile Include="Common\Filters\AccessAuthorizeAttribute.cs" />
@@ -329,6 +330,7 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Areas\Admin\Views\AdminPanel\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminPanel\InviteAdmin.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -373,7 +375,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Common\Helpers\" />
     <Folder Include="Content\Images\Products\" />
   </ItemGroup>

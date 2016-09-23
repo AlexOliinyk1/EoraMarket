@@ -8,6 +8,7 @@ using EoraMarketplace.Data.Domain.Users;
 using Microsoft.Owin.Security;
 using System.Web;
 using EoraMarketplace.Injector.Services;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace EoraMarketpalce.Web.App_Start
 {

@@ -27,6 +27,8 @@ namespace EoraMarketpalce.Web
         /// <param name="app"></param>
         public void Configuration(IAppBuilder app)
         {
+            app.CreatePerOwinContext<EoraUserManager>(EoraUserManager.Create);
+
             TryCreateDefaultRolesAndUsers();
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions {

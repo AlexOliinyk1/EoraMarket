@@ -4,6 +4,7 @@ using System.Data.Entity;
 using EoraMarketplace.Data.Domain.Characters;
 using EoraMarketplace.Data.Domain.Images;
 using EoraMarketplace.Data.Domain.Goods;
+using System;
 
 namespace EoraMarketplace.Data
 {
@@ -34,6 +35,9 @@ namespace EoraMarketplace.Data
             modelBuilder.Entity<UserRoles>().ToTable("UserRoles");
             modelBuilder.Entity<UserLogins>().ToTable("UserLogins");
             modelBuilder.Entity<UserClaims>().ToTable("UserClaims");
+
+            modelBuilder.Properties<DateTime>().Configure(c => c.HasColumnType("datetime2"));
+
         }
     }
 }

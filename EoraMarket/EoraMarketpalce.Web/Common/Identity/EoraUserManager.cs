@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using System.Web.Mvc;
+using EoraMarketplace.Services.Email;
 
 namespace EoraMarketpalce.Web.Common.Identity
 {
@@ -48,14 +49,14 @@ namespace EoraMarketpalce.Web.Common.Identity
             //    Subject = "Security Code",
             //    BodyFormat = "Your security code is {0}"
             //});
-            //manager.EmailService = new EmailService();
+            manager.EmailService = new EmailService();
             //manager.SmsService = new SmsService();
-            //var dataProtectionProvider = options.DataProtectionProvider;
-            //if(dataProtectionProvider != null)
-            //{
-            //    manager.UserTokenProvider =
-            //        new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
-            //}
+            var dataProtectionProvider = options.DataProtectionProvider;
+            if(dataProtectionProvider != null)
+            {
+                manager.UserTokenProvider =
+                    new DataProtectorTokenProvider<User, int>(dataProtectionProvider.Create("ASP.NET Identity"));
+            }
             return manager;
         }
     }

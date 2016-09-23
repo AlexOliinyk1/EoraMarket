@@ -29,7 +29,12 @@
                             <li>@Html.ActionLink("Characters", "Index", "Character")</li>
                         }
                     }
-                    <li>@Html.ActionLink("To Market", "Index", "Shop")</li>
+                    @{if(User.IsAdmin())
+                        {
+                            <li>@Html.ActionLink("Admin Panel", "", "AdminPanel", new { area = "admin" }, new { @class = "" })</li>
+                        }
+                    }
+                    <li>@Html.ActionLink("Market", "Index", "Shop", new { area = "" }, null)</li>
                 </ul>
                 @Html.Partial("_Account")
             </div>

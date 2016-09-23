@@ -1,0 +1,32 @@
+﻿@model EoraMarketpalce.Web.Areas.Admin.Models.AdminInviteModel
+@{
+    ViewBag.Title = "Invite Admin";
+}
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        @using(Html.BeginForm("InviteAdmin", "AdminPanel", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <div class="row">
+                    @Html.LabelFor(m => m.InvitedEmail, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(x => x.InvitedEmail, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.InvitedEmail, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-success">Send Invitation Email</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
