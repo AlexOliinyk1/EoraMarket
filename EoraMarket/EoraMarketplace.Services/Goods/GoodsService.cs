@@ -135,9 +135,10 @@ namespace EoraMarketplace.Services.Goods
                 throw new Exception("Current product not found in character inventory.");
 
             character.Credits += product.SellPrice;
-            character.Inventory.Remove(cp);
 
-            character = _characterRepository.Update(character);
+            _cpRepository.Delete(cp);
+
+            character = GetCharacterForUser(charId, userId);
         }
 
         private IQueryable<MarketProduct> GetFilteredQuery(Class forClass, string searchName, int? minPrice, int? maxPrice)

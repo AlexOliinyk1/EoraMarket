@@ -98,13 +98,12 @@ namespace EoraMarketplace.Services.Characters
             return character != null ? character.Credits : 0;
         }
 
-        public List<Product> GetCharacterInventory(int userId, int characterId)
+        public List<CharactersProducts> GetCharacterInventory(int userId, int characterId)
         {
-            List<Product> products = _repository.Table.Where(x => x.OwnerId == userId && x.Id == characterId)
-                .Include(x => x.Inventory)
-                .SelectMany(x => x.Inventory.Select(i => i.Product))
-                .Include(x => x.Image)
-                .Include(x => x.Stats)
+            List<CharactersProducts> products = _repository.Table.Where(x => x.OwnerId == userId && x.Id == characterId)
+                .SelectMany(x => x.Inventory)
+                .Include(x => x.Product)
+                .Include(x => x.Product.Image)
                 .ToList();
 
             return products;

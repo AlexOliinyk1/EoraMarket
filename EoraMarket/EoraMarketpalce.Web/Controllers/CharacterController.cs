@@ -77,11 +77,12 @@ namespace EoraMarketpalce.Web.Controllers
             List<InventoryProductModel> inventory = _characterService.GetCharacterInventory(userId, characterId)
                 .Select(x => new InventoryProductModel {
                     Id = x.Id,
-                    ImageUrl = x.Image.ImageUrl,
-                    Name = x.Name,
-                    Price = x.Price,
-                    SellPrice = x.SellPrice,
-                    Stats = x.Stats
+                    ProductId = x.Product.Id,
+                    ImageUrl = x.Product.Image.ImageUrl,
+                    Name = x.Product.Name,
+                    Price = x.Product.Price,
+                    SellPrice = x.Product.SellPrice,
+                    Stats = x.Product.Stats
                 })
                 .ToList();
 

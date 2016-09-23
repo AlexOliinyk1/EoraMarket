@@ -8,10 +8,14 @@ namespace EoraMarketpalce.Web.Models.Goods
     public class CreateProductModel
     {
         public int Quantity { get; set; }
+
         public int Discount { get; set; }
 
         public string Name { get; set; }
+
         public int Price { get; set; }
+
+        public int SellPrice { get; set; }
 
         public string Image { get; set; }
 

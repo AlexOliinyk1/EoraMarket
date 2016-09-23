@@ -7,6 +7,7 @@
         product: {
             name: ko.observable(""),
             price: ko.observable(""),
+            sellPrice: ko.observable(""),
             image: ko.observable(""),
             typeId: ko.observable(""),
             classes: ko.observableArray([]),
@@ -37,6 +38,7 @@
         var data = {
             name: self.model.product.name(),
             price: self.model.product.price(),
+            sellPrice: self.model.product.sellPrice(),
             typeId: 1,
             image: self.model.product.image(),
 

@@ -6,6 +6,7 @@ namespace EoraMarketpalce.Web.Models.Goods
     public class InventoryProductModel
     {
         public int Id { get; set; }
+        public int ProductId { get; set; }
         public string Name { get; set; }
         public int Price { get; set; }
         public int SellPrice { get; set; }

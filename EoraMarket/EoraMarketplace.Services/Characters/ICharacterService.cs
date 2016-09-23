@@ -40,7 +40,7 @@ namespace EoraMarketplace.Services.Characters
         List<Race> GetCharactersRaces();
         List<Class> GetCharactersClasses();
         List<Picture> GetAvatarsByRaceId(int id);
-        List<Product> GetCharacterInventory(int userId, int characterId);
+        List<CharactersProducts> GetCharacterInventory(int userId, int characterId);
         int GetCharacterFunds(int id);
     }
 }

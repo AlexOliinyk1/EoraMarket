@@ -33,7 +33,7 @@
     self.characterInventory = ko.observableArray([]);
     self.toSellDetail = ko.observable(false);
     self.previewToSellProduct = function (product) {
-        loadProductDetails(product.Id, function (result) {
+        loadProductDetails(product.ProductId, function (result) {
             self.toSellDetail(result);
         });
     };

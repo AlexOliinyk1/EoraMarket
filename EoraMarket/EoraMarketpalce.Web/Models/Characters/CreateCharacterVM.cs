@@ -14,11 +14,13 @@ namespace EoraMarketpalce.Web.Models.Characters
         [Required(ErrorMessage = "Enter character name")]
         [MinLength(5, ErrorMessage = "Name must contains at least 5 symbols")]
         public string Name { get; set; }
+
         [Required(ErrorMessage = "Select character image")]
         public int? ImageId { get; set; }
 
         [Required(ErrorMessage = "Select character race")]
         public int SelectedRaceId { get; set; }
+
         [Required(ErrorMessage = "Select character class")]
         public int SelectedClassId { get; set; }
 

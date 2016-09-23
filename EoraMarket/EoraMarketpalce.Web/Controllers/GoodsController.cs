@@ -84,6 +84,7 @@ namespace EoraMarketpalce.Web.Controllers
             Product product = new Product {
                 Name = model.Name,
                 Price = model.Price,
+                SellPrice = model.SellPrice,
                 TypeId = model.TypeId,
                 Image = new EoraMarketplace.Data.Domain.Images.Picture {
                     IsAvatar = false,
