@@ -6,6 +6,7 @@ using System.Linq;
 using System.Data.Entity;
 using EoraMarketplace.Data.Domain.Images;
 using EoraMarketplace.Data.Domain.Goods;
+using System.Data.Entity.Core;
 
 namespace EoraMarketplace.Services.Characters
 {
@@ -107,6 +108,18 @@ namespace EoraMarketplace.Services.Characters
                 .ToList();
 
             return products;
+        }
+
+        public Character UpdateCharacterName(int ownerId, int characterId, string newName)
+        {
+            Character updateChar = _repository.GetById(characterId);
+
+            if(updateChar.OwnerId != ownerId)
+                throw new ObjectNotFoundException("Character not found");
+
+            updateChar.Name = newName;
+
+            return _repository.Update(updateChar);
         }
     }
 }

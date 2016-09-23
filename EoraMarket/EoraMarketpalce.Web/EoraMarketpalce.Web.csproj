@@ -234,9 +234,11 @@
     <Compile Include="Models\Auth\SignUpViewModel.cs" />
     <Compile Include="Common\Identity\EoraSignInManager.cs" />
     <Compile Include="Common\Identity\EoraUserManager.cs" />
+    <Compile Include="Models\Characters\CharacterDetailViewModel.cs" />
     <Compile Include="Models\Characters\CharacterInfoViewModel.cs" />
     <Compile Include="Models\Characters\CharaktersViewModel.cs" />
     <Compile Include="Models\Characters\CreateCharacterVM.cs" />
+    <Compile Include="Models\Characters\EditCharacrterViewModel.cs" />
     <Compile Include="Models\Goods\BuyModel.cs" />
     <Compile Include="Models\Goods\CreateProductModel.cs" />
     <Compile Include="Models\Goods\DeleteProductModel.cs" />
@@ -325,6 +327,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap-notify.js" />
+    <Content Include="Scripts\bootstrap-notify.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
@@ -336,6 +340,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -349,6 +355,7 @@
     <Content Include="Scripts\ViewModels\characterCreate.js" />
     <Content Include="Scripts\ViewModels\charakters.js" />
     <Content Include="Scripts\ViewModels\createProductViewModel.js" />
+    <Content Include="Scripts\ViewModels\editCharacterViewModel.js" />
     <Content Include="Scripts\ViewModels\shopViewModel.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
@@ -375,6 +382,8 @@
     <Content Include="Views\Shop\CreateProduct.cshtml" />
     <Content Include="Views\SignIn\ResetPassword.cshtml" />
     <Content Include="Views\SignIn\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Character\View.cshtml" />
+    <Content Include="Views\Character\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -8,9 +8,10 @@
     }
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @if(User.IsUser())
-            {
-                Html.Action("ActiveCharacterView", "Character");
+            @{if(User.IsUser())
+                {
+                    @Html.Action("ActiveCharacterView", "Character");
+                }
             }
         </li>
 

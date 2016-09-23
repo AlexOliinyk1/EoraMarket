@@ -37,10 +37,41 @@ namespace EoraMarketplace.Services.Characters
         /// <returns></returns>
         List<Character> GetUserCharacters(int userId, int page, int take);
 
+        /// <summary>
+        ///     Get all characters races
+        /// </summary>
+        /// <returns></returns>
         List<Race> GetCharactersRaces();
+        /// <summary>
+        ///     Get all characters classes
+        /// </summary>
+        /// <returns></returns>
         List<Class> GetCharactersClasses();
+        /// <summary>
+        ///     Get avatar images available for Race
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         List<Picture> GetAvatarsByRaceId(int id);
+        /// <summary>
+        ///     Get character own product
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="characterId"></param>
+        /// <returns></returns>
         List<CharactersProducts> GetCharacterInventory(int userId, int characterId);
+        /// <summary>
+        ///     Get amount of character funds
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         int GetCharacterFunds(int id);
+        /// <summary>
+        ///     Update name of character
+        /// </summary>
+        /// <param name="characterId"></param>
+        /// <param name="newName"></param>
+        /// <returns></returns>
+        Character UpdateCharacterName(int ownerId, int characterId, string newName);
     }
 }

@@ -1,0 +1,38 @@
+﻿@model EoraMarketpalce.Web.Models.Characters.EditCharacrterViewModel
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+
+        @using(Ajax.BeginForm("Edit", "Character", null, new AjaxOptions {
+            HttpMethod = "post",
+            OnSuccess = "applyChanges",
+            OnFailure = "failChanges"
+        }, null))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(x => x.CharacterId)
+
+            <div class="form-group">
+                <div class="row">
+                    @Html.LabelFor(m => m.NewName, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(x => x.NewName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.NewName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-success">Apply changes</button>
+                        @Html.ActionLink("Cancel", "View", "Character", new { id = Model.CharacterId }, new { @class = "btn btn-danger" })
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

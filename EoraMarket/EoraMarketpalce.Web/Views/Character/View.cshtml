@@ -1,0 +1,77 @@
+﻿@using EoraMarketpalce.Web.Common.Extentions
+@model EoraMarketpalce.Web.Models.Characters.CharacterDetailViewModel
+@{
+    ViewBag.Title = "View";
+}
+@section scripts{
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js");
+    @Scripts.Render("~/Scripts/ViewModels/editCharacterViewModel.js");
+}
+<h2>View: @Model.Character.Name</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
+
+            <div class="col-sm-6 col-md-6">
+                <img width="300" src="@Html.UrlToHtmlValid(Model.Character.ImageUrl)" alt="@Model.Character.Name" class="img-rounded img-responsive">
+            </div>
+            <div class="col-sm-6 col-md-6">
+                <blockquote>
+                    <p>@Model.Character.Name</p>
+                    <small>
+                        <cite title="Source Title">@Model.Character.Race</cite>&nbsp;/&nbsp;<cite title="Source Title">@Model.Character.Class</cite>
+                    </small>
+                </blockquote>
+            </div>
+            <div class="col-sm-6 col-md-6">
+                <div id="editForm">
+                    @Ajax.ActionLink("Edit", "Edit", "Character", new { id = Model.Character.Id }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "editForm" }, new { @class = "btn btn-info" })
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-6">
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-info">
+                <h4>@Model.Character.Name&nbsp;Inventory:</h4>
+            </li>
+            @foreach(var item in Model.Inventory)
+            {
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img height="70" src="@Html.UrlToHtmlValid(item.Image.ImageUrl)" alt="@item.Name" />
+                        </div>
+                        <div class="col-md-5">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>@item.Name</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>Price:</label>
+                                    <span>@item.Price</span>
+                                    <span>coins</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Stats:</label>
+                            <ul class="row">
+                                @foreach(var stat in item.Stats)
+                                {
+                                    <li>
+                                        <label class="label label-default">@stat.StatName</label>:<span class="badge">@stat.StatValue</span>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
 using EoraMarketplace.Services.Characters;
 using EoraMarketplace.Services.Goods;
+using EoraMarketplace.Services.Stats;
 
 namespace EoraMarketplace.Injector.Services
 {
@@ -10,6 +11,7 @@ namespace EoraMarketplace.Injector.Services
         {
             container.RegisterType<ICharacterService, CharacterService>();
             container.RegisterType<IGoodsService, GoodsService>();
+            container.RegisterType<IStatsService, StatsService>();
         }
     }
 }

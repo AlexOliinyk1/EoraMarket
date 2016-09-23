@@ -13,6 +13,8 @@ using System;
 using EoraMarketplace.Data.Domain.Goods;
 using Newtonsoft.Json;
 using EoraMarketpalce.Web.Models.Goods;
+using EoraMarketplace.Services.Stats;
+using System.Net;
 
 namespace EoraMarketpalce.Web.Controllers
 {
@@ -20,14 +22,17 @@ namespace EoraMarketpalce.Web.Controllers
     public class CharacterController : AppController
     {
         private ICharacterService _characterService;
+        private IStatsService _statsService;
 
         /// <summary>
         ///     Ctor.
         /// </summary>
         /// <param name="service"></param>
-        public CharacterController(ICharacterService service)
+        /// <param name="statsService"></param>
+        public CharacterController(ICharacterService service, IStatsService statsService)
         {
             this._characterService = service;
+            this._statsService = statsService;
         }
 
         public ViewResult Index()
@@ -39,6 +44,36 @@ namespace EoraMarketpalce.Web.Controllers
             return View(new CharactersVM() {
                 Characters = chars,
             });
+        }
+
+        [HttpGet]
+        public PartialViewResult Edit(int id)
+        {
+            return PartialView(new EditCharacrterViewModel(id));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public HttpStatusCodeResult Edit(int characterId, string newName)
+        {
+            if(characterId == 0 || string.IsNullOrEmpty(newName))
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Name is required");
+
+            if(newName.Length < 5)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Name must be at least 5 characters long");
+
+            try
+            {
+                Character uaserChar = _characterService.UpdateCharacterName(User.Identity.GetUserId<int>(), characterId, newName);
+
+                return new HttpStatusCodeResult(HttpStatusCode.OK);
+            }
+            catch(Exception exc)
+            {
+                AddErrors(exc);
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Update is failed");
         }
 
         public ActionResult SelectCharacter(int characterId)
@@ -60,7 +95,31 @@ namespace EoraMarketpalce.Web.Controllers
 
         public ViewResult View(int id)
         {
-            return View(new Character());
+            int userId = User.Identity.GetUserId<int>();
+
+            List<Product> inventory = _characterService.GetCharacterInventory(userId, id).Select(x => x.Product).ToList();
+
+            foreach(var item in inventory)
+            {
+                item.Stats = _statsService.GetStatsByProduct(item.Id);
+            }
+
+            Character character = _characterService.GetUserCharacter(userId, id, true);
+            CharacterInfoViewModel info = new CharacterInfoViewModel {
+                Id = character.Id,
+                Name = character.Name,
+                Class = character.Class.Name,
+                Race = character.Race.Name,
+                Credits = character.Credits,
+                ImageUrl = character.Avatar.ImageUrl
+            };
+
+            CharacterDetailViewModel model = new CharacterDetailViewModel {
+                Character = info,
+                Inventory = inventory
+            };
+
+            return View(model);
         }
 
         public JsonResult GetActiveCharacter()

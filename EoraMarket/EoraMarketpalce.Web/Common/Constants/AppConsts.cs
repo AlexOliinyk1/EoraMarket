@@ -16,7 +16,7 @@
 
         public const string CHARACTER_STORE_NAME = "characterId";
 
-        public const int START_COSTS = 100000;
+        public const int START_COSTS = 1000;
         public const int MONEY_MULTIPLIER = 100;
         public const string DEFAULT_IMAGE_URL = "~/Content/Images/no-image.png";
     }

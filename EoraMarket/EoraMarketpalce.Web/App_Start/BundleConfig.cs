@@ -32,7 +32,11 @@ namespace EoraMarketpalce.Web
 
             bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
                 "~/Scripts/knockout-3.4.0.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/notificator").Include(
+                "~/Scripts/bootstrap-notify.js"));
         }
+
 
         private static void RregisterStyles(BundleCollection bundles)
         {

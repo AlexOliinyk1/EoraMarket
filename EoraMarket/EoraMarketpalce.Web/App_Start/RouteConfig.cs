@@ -15,6 +15,11 @@ namespace EoraMarketpalce.Web
                 defaults: new { controller = "SignIn", action = "SignOut" }
             );
 
+            //routes.MapRoute(
+            //    name: "EditChar",
+            //    url: "Character/Edit/"
+            //);
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
