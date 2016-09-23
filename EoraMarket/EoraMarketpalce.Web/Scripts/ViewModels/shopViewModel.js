@@ -69,15 +69,24 @@
                 ProdId: product.id
             }).success(function (result) {
                 getUserCharacter().success(function (result) {
-                    //TODO: show message (popup)
-
                     loadInventory(self.character.Id);
                     self.toSellDetail(false);
                     self.transferInProccess(false);
+
+                    $.notify({
+                        icon: 'glyphicon glyphicon-ok',
+                        message: product.name + " buy succefully"
+                    }, {
+                        type: 'success',
+                        placement: {
+                            from: "top",
+                            align: "center"
+                        }
+                    });
                 });
             }).fail(function (result) {
                 self.transferInProccess(false);
-                console.log(result);
+                showErrorMessage(result);
             });
         }
     };
@@ -93,9 +102,19 @@
                 console.log(result);
                 loadInventory(self.character.Id);
                 self.transferInProccess(false);
-                //TODO: show message (popup)
+
+                $.notify({
+                    icon: 'glyphicon glyphicon-ok',
+                    message: product.name + " sell succefully"
+                }, {
+                    type: 'success',
+                    placement: {
+                        from: "top",
+                        align: "center"
+                    }
+                });
             }).fail(function (result) {
-                console.log(result);
+                showErrorMessage(result);
             });
         }
     };
@@ -118,13 +137,14 @@
             }
             self.TotalResults(result.totalProducts);
         }).fail(function (result) {
-            console.log(result);
+            showErrorMessage(result);
         });
     }
     function loadInventory(charId) {
         $.get("/Character/GetInventory", { characterId: charId }).success(function (result) {
             self.characterInventory(result);
         }).fail(function (result) {
+            showErrorMessage(result);
             console.log(result);
         });
     }
@@ -133,15 +153,36 @@
             self.character = result;
             self.characterCredit(self.character.Credits);
         }).fail(function (result) {
-            console.log(result);
+            showErrorMessage(result);
         });
         return q;
     }
     function loadProductDetails(productId, successCalback) {
         $.get("/api/Goods/Detail/" + productId).success(successCalback).fail(function (result) {
-            console.log(result);
+            showErrorMessage(result);
         });
     }
+    function showErrorMessage(result, message) {
+        var errorMessage = result.responseJSON.exceptionMessage ? result.responseJSON.exceptionMessage : result.responseJSON;
+
+        if (message) {
+            errorMessage = message;
+        }
+
+        $.notify({
+            // options
+            icon: 'glyphicon glyphicon-warning-sign',
+            message: errorMessage
+        }, {
+            // settings
+            type: 'danger',
+            placement: {
+                from: "top",
+                align: "center"
+            }
+        });
+    }
+
     self.init = function () {
         getUserCharacter().success(function (result) {
             loadInventory(result.Id);
