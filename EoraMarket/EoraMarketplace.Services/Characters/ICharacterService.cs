@@ -1,6 +1,7 @@
 ﻿using EoraMarketplace.Data.Domain.Characters;
 using EoraMarketplace.Data.Domain.Images;
 using System.Collections.Generic;
+using EoraMarketplace.Data.Domain.Goods;
 
 namespace EoraMarketplace.Services.Characters
 {
@@ -39,5 +40,7 @@ namespace EoraMarketplace.Services.Characters
         List<Race> GetCharactersRaces();
         List<Class> GetCharactersClasses();
         List<Picture> GetAvatarsByRaceId(int id);
+        List<Product> GetCharacterInventory(int userId, int characterId);
+        int GetCharacterFunds(int id);
     }
 }

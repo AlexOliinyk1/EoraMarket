@@ -33,6 +33,6 @@ namespace EoraMarketplace.Data.Domain.Characters
         [ForeignKey("ImageId")]
         public Picture Avatar { get; set; }
 
-        public List<Product> Inventory { get; set; }
+        public List<CharactersProducts> Inventory { get; set; }
     }
 }

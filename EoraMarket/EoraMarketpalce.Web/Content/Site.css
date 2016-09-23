@@ -24,17 +24,22 @@
 
 
 .character-info {
-    margin-top: -20px;
     margin-bottom: 0;
     min-height: 50px;
     width: 200px;
     color: #FFFFFF;
-    background: #333;
 }
 
-    .character-info .char-photo img {
+    .character-info .char-header {
+        height: 80px;
         position: absolute;
-        margin: 10px;
+        background: #333;
+        padding: 10px;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+    }
+
+    .character-info .char-photo img {
         float: left;
         max-width: 50px;
         height: 60px;
@@ -42,19 +47,28 @@
     }
 
     .character-info .char-name {
-        padding-top: 16px;
-        padding-left: 70px;
+        margin-top: 15px;
+        padding-left: 60px;
         font-size: 1.2em;
         text-align: left;
     }
 
     .character-info .char-detail {
-        padding-left: 70px;
+        padding-left: 60px;
         margin-top: -14px;
         font-size: 0.8em;
         color: rgba(255, 255, 255, 0.9);
     }
 
+    .character-info .char-funds {
+        padding-left: 60px;
+        font-size: 0.9em;
+    }
+
     .character-info p {
         margin-bottom: 0;
     }
+
+.margin-bot {
+    margin-bottom: 10px;
+}

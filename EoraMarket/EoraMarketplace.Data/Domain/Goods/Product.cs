@@ -12,6 +12,7 @@ namespace EoraMarketplace.Data.Domain.Goods
         public int Id { get; set; }
         public string Name { get; set; }
         public int Price { get; set; }
+        public int SellPrice { get; set; }
 
         public int ImageId { get; set; }
         public int TypeId { get; set; }
@@ -25,6 +26,6 @@ namespace EoraMarketplace.Data.Domain.Goods
         public List<ProductStat> Stats { get; set; }
         public List<Class> Classes { get; set; }
 
-        public List<Character> Owners { get; set; }
+        public List<CharactersProducts> Owners { get; set; }
     }
 }

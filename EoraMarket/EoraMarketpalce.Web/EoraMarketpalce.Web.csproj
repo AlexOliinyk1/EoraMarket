@@ -240,6 +240,7 @@
     <Compile Include="Models\Goods\GoodsFilter.cs" />
     <Compile Include="Models\Goods\GoodsPagingModel.cs" />
     <Compile Include="Models\Goods\ProductModel.cs" />
+    <Compile Include="Models\Goods\InventoryProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App_Start\Startup.cs" />
   </ItemGroup>

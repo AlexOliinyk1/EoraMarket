@@ -16,6 +16,7 @@ namespace EoraMarketplace.Injector.Services
             container.RegisterType<IRepository<Character>, Repository<Character>>();
             container.RegisterType<IRepository<Class>, Repository<Class>>();
             container.RegisterType<IRepository<Race>, Repository<Race>>();
+            container.RegisterType<IRepository<CharactersProducts>, Repository<CharactersProducts>>();
 
             container.RegisterType<IRepository<MarketProduct>, Repository<MarketProduct>>();
         }

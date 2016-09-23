@@ -12,6 +12,7 @@ namespace EoraMarketplace.Data
         public virtual IDbSet<Character> Characters { get; set; }
         public virtual IDbSet<Race> Races { get; set; }
         public virtual IDbSet<Class> Classes { get; set; }
+        public virtual IDbSet<CharactersProducts> CharactersProducts { get; set; }
 
         public virtual IDbSet<MarketProduct> MarketProducts { get; set; }
         public virtual IDbSet<Product> Products { get; set; }

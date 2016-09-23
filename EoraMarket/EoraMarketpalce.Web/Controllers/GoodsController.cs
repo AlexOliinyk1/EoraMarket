@@ -101,13 +101,33 @@ namespace EoraMarketpalce.Web.Controllers
         public HttpResponseMessage BuyProduct([FromBody]BuyModel buy)
         {
             if(RequestContext.Principal.IsAdmin())
-                return new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
+                return Request.CreateResponse(System.Net.HttpStatusCode.BadRequest, "Sell is not allowed to admin");
 
             int userId = RequestContext.Principal.Identity.GetUserId<int>();
 
             try
             {
                 _goodsService.BuyProductByCharacter(userId, buy.CharId, buy.ProdId);
+                return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+            }
+            catch(System.Exception exc)
+            {
+                return Request.CreateResponse(System.Net.HttpStatusCode.BadRequest, exc.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("api/Goods/SellProduct")]
+        public HttpResponseMessage SellProduct([FromBody]BuyModel buy)
+        {
+            if(RequestContext.Principal.IsAdmin())
+                return Request.CreateResponse(System.Net.HttpStatusCode.BadRequest, "Sell is not allowed to admin");
+
+            int userId = RequestContext.Principal.Identity.GetUserId<int>();
+
+            try
+            {
+                _goodsService.SellCharacterProduct(userId, buy.CharId, buy.ProdId);
                 return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
             }
             catch(System.Exception exc)

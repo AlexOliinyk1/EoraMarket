@@ -15,11 +15,6 @@ namespace EoraMarketpalce.Web
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-            
-            var jsonFormater = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
-
-            jsonFormater.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            jsonFormater.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
         }
     }
 }

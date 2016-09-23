@@ -13,11 +13,11 @@
 <h2>Shop</h2>
 <div>
 
-    <ul class="nav nav-tabs" role="tablist">
+    <ul class="nav nav-tabs margin-bot" role="tablist">
         <li role="presentation" class="active"><a href="#buy" aria-controls="buy" role="tab" data-toggle="tab">Buy</a></li>
         <li role="presentation"><a href="#sell" aria-controls="sell" role="tab" data-toggle="tab">Sell</a></li>
+        <li role="presentation" class="pull-right disabled"><a href="#sell">Available: <span data-bind="text:characterCredit"></span> Coins</a></li>
     </ul>
-
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="buy">
             <div class="row">
@@ -45,16 +45,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="col-md-7">
+                                    <div class="col-md-12">
+                                        <button class="btn btn-info" data-bind="click:applyFilters">Apply filters</button>
                                         @{ if(User.IsAdmin())
                                             {
-                                                @Html.ActionLink("Create Product", "CreateProduct", "Shop", null, new { @class = "btn btn-info" })
+                                        @Html.ActionLink("Create Product", "CreateProduct", "Shop", null, new { @class = "btn btn-info" })
                                             }
                                         }
-                                    </div>
-                                    <div class="col-md-5 left">
-                                        <button class="btn btn-info" data-bind="click:applyFilters">Apply filters</button>
-
                                     </div>
                                 </div>
                             </div>
@@ -66,7 +63,18 @@
                                     <img height="70" data-bind="attr:{src:imageUrl, alt:name}" />
                                 </div>
                                 <div class="col-md-7">
-                                    <span data-bind="text:name"></span>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label data-bind="text:name"></label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label>Price:</label>
+                                            <span data-bind="text:$data.price"></span>
+                                            <span>coins</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </li>
@@ -79,9 +87,8 @@
                     <!-- /ko -->
 
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" data-bind="if:detail()">
 
-                    <!--ko if:detail().product-->
                     <div class="panel panel-default" data-bind="with:detail().product">
                         <div class="panel-heading">
                             <h3 class="panel-title" data-bind="text:$data.name"></h3>
@@ -96,10 +103,14 @@
                                         <div class="col-md-12">
                                             <h3 data-bind="text:$data.name"></h3>
                                         </div>
+                                    </div>
+                                    <div class="row" data-bind="if:$data.classes.length>0">
                                         <label class="col-md-4">Available for:</label>
+                                        <!--ko if:$data.classes.length>0-->
                                         <div class="col-md-8" data-bind="foreach: $data.classes">
                                             <span class="label label-primary" data-bind="text:name"></span>
                                         </div>
+                                        <!-- /ko -->
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
@@ -109,10 +120,12 @@
                                             <button class="btn btn-success" data-bind="click:$root.buyProduct, enable:$root.character.Name!=undefined">Buy</button>
                                         </div>
                                     </div>
+                                    <hr />
                                     <div class="row" data-bind="if:$data.stats.length>0">
+                                        <label class="col-md-12">Stats:</label>
                                         <ul class="col-md-12" data-bind="foreach: $data.stats">
                                             <li>
-
+                                                <label class="label label-default" data-bind="text:$data.statName"></label>:<span class="badge" data-bind="text:$data.statValue"></span>
                                             </li>
                                         </ul>
                                     </div>
@@ -120,14 +133,109 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /ko -->
 
                 </div>
             </div>
         </div>
 
         <div role="tabpanel" class="tab-pane" id="sell">
-            Sell
+            <div class="row">
+
+                <div class="col-md-6">
+                    <span data-bind="ifnot:characterInventory().length">
+                        Inventory is empty.
+                    </span>
+                    <!--ko if:characterInventory().length-->
+                    <ul class="list-group" data-bind="foreach: characterInventory">
+                        <li class="list-group-item" data-bind="click:$root.previewToSellProduct">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <img height="70" data-bind="attr:{src:$data.Image.ImageUrl, alt:$data.name}" />
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label data-bind="text:$data.Name"></label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label>Price:</label>
+                                            <span data-bind="text:$data.Price"></span>
+                                            <span>coins</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label>Sell Price:</label>
+                                            <span data-bind="text:$data.SellPrice"></span>
+                                            <span>coins</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <!--/ko-->
+                </div>
+
+
+
+
+
+                <div class="col-md-6">
+                    <div class="panel panel-default" data-bind="with:toSellDetail().product">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h3 class="panel-title " data-bind="text:$data.name"></h3>
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-success" style="float: right;" data-bind="click:$root.sellProduct">Sell</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                        <img width="150" data-bind="attr:{src:$data.image.imageUrl}" />
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h3 data-bind="text:$data.name"></h3>
+                                            </div>
+                                        </div>
+                                        <div class="row" data-bind="if:$data.classes.length>0">
+                                            <label class="col-md-4">Available for:</label>
+                                            <!--ko if:$data.classes.length>0-->
+                                            <div class="col-md-8" data-bind="foreach: $data.classes">
+                                                <span class="label label-primary" data-bind="text:name"></span>
+                                            </div>
+                                            <!-- /ko -->
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label>Price:</label>
+                                                <span data-bind="text:$data.price"></span>
+                                                <span>coins</span>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row" data-bind="if:$data.stats.length>0">
+                                            <label class="col-md-12">Stats:</label>
+                                            <ul class="col-md-12" data-bind="foreach: $data.stats">
+                                                <li>
+                                                    <label class="label label-default" data-bind="text:$data.statName"></label>:<span class="badge" data-bind="text:$data.statValue"></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -1,6 +1,7 @@
 ﻿using EoraMarketplace.Data.Domain.Goods;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Script.Serialization;
 
 namespace EoraMarketplace.Data.Domain.Characters
 {

@@ -5,6 +5,7 @@ using EoraMarketplace.DataAccess.Repositories;
 using System.Linq;
 using System.Data.Entity;
 using EoraMarketplace.Data.Domain.Images;
+using EoraMarketplace.Data.Domain.Goods;
 
 namespace EoraMarketplace.Services.Characters
 {
@@ -89,6 +90,24 @@ namespace EoraMarketplace.Services.Characters
                 .Where(x => x.Id == id)
                 .SelectMany(x => x.AvailableAvatars)
                 .ToList();
+        }
+
+        public int GetCharacterFunds(int id)
+        {
+            Character character = _repository.GetById(id);
+            return character != null ? character.Credits : 0;
+        }
+
+        public List<Product> GetCharacterInventory(int userId, int characterId)
+        {
+            List<Product> products = _repository.Table.Where(x => x.OwnerId == userId && x.Id == characterId)
+                .Include(x => x.Inventory)
+                .SelectMany(x => x.Inventory.Select(i => i.Product))
+                .Include(x => x.Image)
+                .Include(x => x.Stats)
+                .ToList();
+
+            return products;
         }
     }
 }

@@ -10,6 +10,9 @@ using Microsoft.AspNet.Identity;
 using System.Linq;
 using EoraMarketplace.Data.Domain.Users;
 using System;
+using EoraMarketplace.Data.Domain.Goods;
+using Newtonsoft.Json;
+using EoraMarketpalce.Web.Models.Goods;
 
 namespace EoraMarketpalce.Web.Controllers
 {
@@ -62,7 +65,27 @@ namespace EoraMarketpalce.Web.Controllers
 
         public JsonResult GetActiveCharacter()
         {
+            ActiveCharacter.Credits = _characterService.GetCharacterFunds(ActiveCharacter.Id);
             return Json(ActiveCharacter, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetInventory(int characterId)
+        {
+            int userId = User.Identity.GetUserId<int>();
+
+            List<InventoryProductModel> inventory = _characterService.GetCharacterInventory(userId, characterId)
+                .Select(x => new InventoryProductModel {
+                    Id = x.Id,
+                    ImageUrl = x.Image.ImageUrl,
+                    Name = x.Name,
+                    Price = x.Price,
+                    SellPrice = x.SellPrice,
+                    Stats = x.Stats
+                })
+                .ToList();
+
+            return Json(inventory, JsonRequestBehavior.AllowGet);
         }
 
         [Authorize]

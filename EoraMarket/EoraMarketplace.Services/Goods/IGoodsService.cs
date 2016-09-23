@@ -14,5 +14,6 @@ namespace EoraMarketplace.Services.Goods
         int GetGoodsCount(string searchName, int? minPrice, int? maxPrice);
         MarketProduct CreateProduct(Product product, List<Class> classes, List<ProductStat> stats);
         void BuyProductByCharacter(int userId, int charId, int prodId);
+        void SellCharacterProduct(int userId, int charId, int prodId);
     }
 }

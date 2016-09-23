@@ -18,7 +18,7 @@ namespace EoraMarketplace.DataAccess.Migrations
                     })
                 .PrimaryKey(t => new { t.Product_Id, t.Character_Id })
                 .ForeignKey("dbo.Products", t => t.Product_Id, cascadeDelete: true)
-                .ForeignKey("dbo.Characters", t => t.Character_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Characters", t => t.Character_Id, cascadeDelete: false)
                 .Index(t => t.Product_Id)
                 .Index(t => t.Character_Id);
             
