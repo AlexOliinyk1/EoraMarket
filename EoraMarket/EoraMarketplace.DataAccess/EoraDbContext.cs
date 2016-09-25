@@ -26,7 +26,7 @@ namespace EoraMarketplace.Data
         public virtual IDbSet<Picture> Images { get; set; }
 
         public EoraDbContext()
-            : base("DevConnection")
+            : base("EoraConnection")
         { }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

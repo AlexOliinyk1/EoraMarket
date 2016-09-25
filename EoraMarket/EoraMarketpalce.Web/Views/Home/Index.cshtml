@@ -3,26 +3,52 @@
 }
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <div class="row">
+        <div class="col-md-5">
+            <img width="400" src="~/Content/Images/WorldMap.jpg" />
+        </div>
+        <div class="col-md-7">
+            <h1>Eora Marketplace</h1>
+            <p class="lead">
+                Eora is home to a multitude of races, ethnicities and creatures that populate it.
+            </p>
+            <p class="lead">
+                Only in the Eora Marketplace you can buy weapons or armor for your character from all parts of Eora
+            </p>
+            <p><a href="@Url.Action("", "Shop")" class="btn btn-primary btn-lg">Go to market &raquo;</a></p>
+        </div>
+    </div>
 </div>
 
 <div class="row">
+    <div class="col-md-2"></div>
     <div class="col-md-4">
-        <h2>Getting started</h2>
+        <h2>
+            Weapons
+        </h2>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            All weapons are used either as melee or ranged weapons.
+            Melee weapons are grouped by their relative handedness and speed.
+            Each weapon or type of ammo deals a certain type of damage (slashing, piercing, crushing etc)
         </p>
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <h2>
+            Armors
+        </h2>
+        <p>
+            Armor encompasses all items a character may wear, that provide the wearer defensive bonuses during combat, particularly increasing its Damage Reduction.
+            There are several types of armor and shields available, each armor type has three quality levels: normal, fine, and exquisite.
+            Armor is worn in the body slot, while shields used as part of Weapons sets.
+        </p>
     </div>
+    <div class="col-md-2"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-4"></div>
     <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a href="@Url.Action("", "Shop")" class="btn btn-primary btn-lg">Become Eora Marketlace Customer</a></p>
     </div>
+    <div class="col-md-4"></div>
 </div>

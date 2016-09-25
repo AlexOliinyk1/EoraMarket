@@ -315,6 +315,7 @@
     <Content Include="Content\Images\player\Human\m\male_human_n_lg.png" />
     <Content Include="Content\Images\player\Human\m\male_human_o_lg.png" />
     <Content Include="Content\Images\no-image.png" />
+    <Content Include="Content\Images\WorldMap.jpg" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\ShopStyles.css" />
     <Content Include="Content\Test\male_human_p_lg.png" />
