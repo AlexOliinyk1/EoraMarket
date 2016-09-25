@@ -8,9 +8,8 @@
     self.Pager().PageSize(5);
 
     self.uiFilter = {
-        productName: ko.observable('').extend({ throttle: 30 }),
-        minPrice: ko.observable(),
-        maxPrice: ko.observable(),
+        productName: ko.observable(''),
+        priceRange: ko.observableArray([0, 1000]),
         activeClass: ko.observable()
     };
     self.applyFilters = function () {
@@ -119,13 +118,19 @@
         }
     };
 
+    self.remoteHandler = function (term, callback) {
+        $.get("api/Goods/GetNames", { searchstring: term }).success(function (result) {
+            callback(result);
+        });
+    }
+
     function loadGoods() {
         var userClass = self.character ? { name: self.character.Class } : null;
         $.get("/api/Goods", {
             filter: {
                 productName: self.uiFilter.productName,
-                minPrice: self.uiFilter.minPrice,
-                maxPrice: self.uiFilter.maxPrice,
+                minPrice: self.uiFilter.priceRange()[0],
+                maxPrice: self.uiFilter.priceRange()[1],
                 page: self.Pager().CurrentPage(),
                 perPage: self.Pager().PageSize(),
                 activeClass: userClass,
@@ -160,6 +165,7 @@
             showErrorMessage(result);
         });
     }
+
     function showErrorMessage(result, message) {
         var errorMessage = result.responseJSON.exceptionMessage ? result.responseJSON.exceptionMessage : result.responseJSON;
 
@@ -198,8 +204,33 @@
 }
 
 $(document).ready(function () {
+    ko.bindingHandlers.slider = {
+        init: function (element, valueAccessor, allBindingsAccessor) {
+            var options = allBindingsAccessor().sliderOptions || {};
+            var observable = valueAccessor();
+
+            if (observable().splice) {
+                options.range = true;
+            }
+
+            options.slide = function (e, ui) {
+                observable(ui.values ? ui.values : ui.value);
+            };
+
+            ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
+                $(element).slider("destroy");
+            });
+
+            $(element).slider(options);
+        },
+        update: function (element, valueAccessor) {
+            var value = ko.utils.unwrapObservable(valueAccessor());
+            $(element).slider(value.slice ? "values" : "value", value);
+
+        }
+    };
+
     var vm = new shopViewModel();
     vm.init();
     ko.applyBindings(vm);
 });
-

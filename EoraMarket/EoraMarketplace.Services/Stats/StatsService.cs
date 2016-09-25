@@ -27,5 +27,10 @@ namespace EoraMarketplace.Services.Stats
 
             return stats;
         }
+
+        public List<string> GetStatsNames(int id)
+        {
+            return null;
+        }
     }
 }

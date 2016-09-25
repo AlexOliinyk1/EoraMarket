@@ -6,5 +6,6 @@ namespace EoraMarketplace.Services.Stats
     public interface IStatsService
     {
         List<ProductStat> GetStatsByProduct(int id);
+        List<string> GetStatsNames(int id);
     }
 }

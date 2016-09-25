@@ -84,11 +84,11 @@ namespace EoraMarketplace.Services.Goods
 
         public List<string> GetProductNames(string namePart)
         {
-            return _goodsRepository.Table.Where(x => x.Product.Name.Contains(namePart))
+            return _goodsRepository.Table.Where(x => !x.IsDeleted && x.Product.Name.Contains(namePart))
                 .Select(x => x.Product.Name)
                 .ToList();
         }
-
+        
         public int GetGoodsCount(Class forClass, string searchName, int? minPrice, int? maxPrice)
         {
             return GetFilteredQuery(forClass, searchName, minPrice, maxPrice).Count();

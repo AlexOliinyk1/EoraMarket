@@ -3,11 +3,13 @@
     ViewBag.Title = "Shop";
 }
 @section scripts{
+    @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/Scripts/ViewModels/shopViewModel.js")
     @Scripts.Render("~/Scripts/ko.pager.js")
-
+    @Scripts.Render("~/Scripts/knockout-jqAutocomplete.js")
 }
 @section styles{
+    @Styles.Render("~/Content/jqueryui")
     @Styles.Render("~/Content/ShopStyles.css")
 }
 <h2>Shop</h2>
@@ -28,22 +30,25 @@
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">Saerch Name</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" data-bind="textInput :uiFilter.productName" />
+                                        <input class="form-control" data-bind="jqAuto: { source: remoteHandler, value: uiFilter.productName, options: { delay: 250 } }" />
                                     </div>
                                 </div>
-
+                            </div>
+                            <div class="row">
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">Min Price</label>
-                                    <div class="col-md-9">
-                                        <input class="form-control" data-bind="value:uiFilter.minPrice" />
-                                    </div>
+                                        <label class="col-md-3 control-label">Price Range:</label>
+                                        <div class="col-md-1">
+                                            <span data-bind="text:uiFilter.priceRange()[0]"></span>
+                                        </div>
+                                        <div class="col-md-7 padding-five">
+                                            <div data-bind="slider: uiFilter.priceRange, sliderOptions: {min: 0, max: 1000, step: 1}"></div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <span data-bind="text:uiFilter.priceRange()[1]"></span>
+                                        </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Max Price</label>
-                                    <div class="col-md-9">
-                                        <input class="form-control" data-bind="value:uiFilter.maxPrice" />
-                                    </div>
-                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <button class="btn btn-info" data-bind="click:applyFilters">Apply filters</button>
@@ -95,7 +100,6 @@
 
                 </div>
                 <div class="col-md-6" data-bind="if:detail()">
-
                     <div class="panel panel-default" data-bind="with:detail().product">
                         <div class="panel-heading">
                             <h3 class="panel-title" data-bind="text:$data.name"></h3>
@@ -140,7 +144,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

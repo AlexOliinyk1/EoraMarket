@@ -67,10 +67,16 @@ namespace EoraMarketpalce.Web.Controllers
 
         [HttpGet]
         [Route("api/Goods/GetNames")]
-        public string GetProductNames([FromUri]string searchstring)
+        public List<string> GetProductNames([FromUri]string searchstring)
         {
-            var foo = JsonConvert.SerializeObject(_goodsService.GetProductNames(searchstring), new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
-            return foo;
+            return _goodsService.GetProductNames(searchstring).Take(10).ToList();
+        }
+
+        [HttpGet]
+        [Route("api/Goods/GetStats")]
+        public List<string> GetProductStats([FromUri]string searchstring)
+        {
+            return _goodsService.GetProductNames(searchstring).Take(10).ToList();
         }
 
         [HttpPost]
