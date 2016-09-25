@@ -105,6 +105,7 @@ namespace EoraMarketplace.Services.Characters
                 .SelectMany(x => x.Inventory)
                 .Include(x => x.Product)
                 .Include(x => x.Product.Image)
+                .Include(x => x.Product.Classes)
                 .ToList();
 
             return products;

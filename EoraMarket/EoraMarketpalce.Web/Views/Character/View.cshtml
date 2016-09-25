@@ -5,8 +5,13 @@
 }
 @section scripts{
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js");
+    @Scripts.Render("~/Scripts/jquery-ui-1.12.1.js");
     @Scripts.Render("~/Scripts/ViewModels/editCharacterViewModel.js");
 }
+@section styles{
+    @Styles.Render("~/Content/jquery-ui.css")
+}
+
 <h2>View: @Model.Character.Name</h2>
 
 <div class="row">
@@ -29,49 +34,82 @@
                     @Ajax.ActionLink("Edit", "Edit", "Character", new { id = Model.Character.Id }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "editForm" }, new { @class = "btn btn-info" })
                 </div>
             </div>
-
         </div>
     </div>
     <div class="col-md-6">
-        <ul class="list-group">
-            <li class="list-group-item list-group-item-info">
+        <div class="row">
+            <div class="col-md-12">
                 <h4>@Model.Character.Name&nbsp;Inventory:</h4>
-            </li>
+            </div>
+        </div>
+        <div id="inventory-items">
             @foreach(var item in Model.Inventory)
             {
-                <li class="list-group-item">
+                <div class="head row">
+                    <div class="col-md-3">
+                        <img height="70" src="@Html.UrlToHtmlValid(item.Image.ImageUrl)" alt="@item.Name" />
+                    </div>
+                    <div class="col-md-5">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>@item.Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Price:</label>
+                                <span>@item.Price</span>
+                                <span>coins</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
                     <div class="row">
-                        <div class="col-md-3">
-                            <img height="70" src="@Html.UrlToHtmlValid(item.Image.ImageUrl)" alt="@item.Name" />
-                        </div>
-                        <div class="col-md-5">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label>@item.Name</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label>Price:</label>
-                                    <span>@item.Price</span>
-                                    <span>coins</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label>Stats:</label>
                             <ul class="row">
-                                @foreach(var stat in item.Stats)
+                                @if(item.Stats.Count > 0)
+                                {
+                                    foreach(var stat in item.Stats)
+                                    {
+                                        <li>
+                                            <label class="label label-default">@stat.StatName</label>:<span class="badge">@stat.StatValue</span>
+                                        </li>
+                                    }
+                                }
+                                else
                                 {
                                     <li>
-                                        <label class="label label-default">@stat.StatName</label>:<span class="badge">@stat.StatValue</span>
+                                        <label class="label label-default">No active stats</label>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Classes:</label>
+                            <ul class="row">
+                                @if(item.Classes.Count > 0)
+                                {
+                                    foreach(var prodClass in item.Classes)
+                                    {
+                                        <li>
+                                            <label class="label label-default">@prodClass.Name</label>
+                                        </li>
+                                    }
+                                }
+                                else
+                                {
+                                    <li>
+                                        <label class="label label-default">Common item</label>
                                     </li>
                                 }
                             </ul>
                         </div>
                     </div>
-                </li>
+                </div>
+
             }
-        </ul>
+        </div>
     </div>
 </div>

@@ -16,3 +16,11 @@ function failChanges(result) {
         }
     });
 }
+
+$(function () {
+    $("#inventory-items").accordion({
+        collapsible: true,
+        active: false,
+        header: ".head"
+    });
+});

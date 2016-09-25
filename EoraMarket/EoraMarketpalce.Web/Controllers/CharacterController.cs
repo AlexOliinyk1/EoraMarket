@@ -98,6 +98,7 @@ namespace EoraMarketpalce.Web.Controllers
         {
             int userId = User.Identity.GetUserId<int>();
 
+            Character character = _characterService.GetUserCharacter(userId, id, true);
             List<Product> inventory = _characterService.GetCharacterInventory(userId, id).Select(x => x.Product).ToList();
 
             foreach(var item in inventory)
@@ -105,7 +106,6 @@ namespace EoraMarketpalce.Web.Controllers
                 item.Stats = _statsService.GetStatsByProduct(item.Id);
             }
 
-            Character character = _characterService.GetUserCharacter(userId, id, true);
             CharacterInfoViewModel info = new CharacterInfoViewModel {
                 Id = character.Id,
                 Name = character.Name,
