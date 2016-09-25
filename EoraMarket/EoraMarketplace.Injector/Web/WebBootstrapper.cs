@@ -7,8 +7,15 @@ using EoraMarketplace.DataAccess.Repositories;
 
 namespace EoraMarketplace.Injector.Web
 {
+    /// <summary>
+    ///     Dependency injector for Asp.Net application client
+    /// </summary>
     public class WebBootstrapper : Bootstrapper<WebBootstrapper>
     {
+        /// <summary>
+        ///     Register all dependencies for current injector
+        /// </summary>
+        /// <param name="container">Instance of Unity container</param>
         protected internal override void RegisterTypes(IUnityContainer container)
         {
             container.RegisterType<DbContext, EoraDbContext>(new PerThreadLifetimeManager());

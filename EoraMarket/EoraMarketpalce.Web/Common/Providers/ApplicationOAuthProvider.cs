@@ -14,10 +14,17 @@ using System.Web;
 
 namespace EoraMarketpalce.Web.Common.Providers
 {
+    /// <summary>
+    ///     OAuthProvider for application web api part
+    /// </summary>
     internal class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {
         private readonly string _publicClientId;
 
+        /// <summary>
+        ///     Ctor.
+        /// </summary>
+        /// <param name="publicClientId">Id for application web api service</param>
         public ApplicationOAuthProvider(string publicClientId)
         {
             if(publicClientId == null)

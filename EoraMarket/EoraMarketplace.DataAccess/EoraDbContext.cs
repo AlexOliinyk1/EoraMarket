@@ -8,6 +8,9 @@ using System;
 
 namespace EoraMarketplace.Data
 {
+    /// <summary>
+    ///     DbContext for Eora Marketplace application
+    /// </summary>
     public class EoraDbContext : IdentityDbContext<User, Role, int, UserLogins, UserRoles, UserClaims>
     {
         public virtual IDbSet<Character> Characters { get; set; }

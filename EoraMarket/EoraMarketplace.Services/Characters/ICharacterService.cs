@@ -5,6 +5,9 @@ using EoraMarketplace.Data.Domain.Goods;
 
 namespace EoraMarketplace.Services.Characters
 {
+    /// <summary>
+    ///     Service that present possibilities to manage users characters
+    /// </summary>
     public interface ICharacterService
     {
         /// <summary>

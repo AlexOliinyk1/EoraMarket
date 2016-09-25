@@ -4,6 +4,10 @@ using System.Linq;
 
 namespace EoraMarketplace.DataAccess.Repositories
 {
+    /// <summary>
+    ///     Repository to database access
+    /// </summary>
+    /// <typeparam name="TEntity">Present database entity</typeparam>
     public interface IRepository<TEntity> where TEntity : class
     {
         /// <summary>

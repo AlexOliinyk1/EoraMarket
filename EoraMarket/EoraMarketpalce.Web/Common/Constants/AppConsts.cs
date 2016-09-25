@@ -1,5 +1,8 @@
 ﻿namespace EoraMarketpalce.Web.Common.Constants
 {
+    /// <summary>
+    ///     Application constants
+    /// </summary>
     internal sealed class AppConsts
     {
         private AppConsts() { }

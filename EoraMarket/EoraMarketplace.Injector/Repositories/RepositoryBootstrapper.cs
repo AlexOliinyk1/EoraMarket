@@ -6,8 +6,15 @@ using EoraMarketplace.Data.Domain.Goods;
 
 namespace EoraMarketplace.Injector.Services
 {
+    /// <summary>
+    ///     Dependency injector for application repositories
+    /// </summary>
     public class RepositoryBootstrapper : Bootstrapper<RepositoryBootstrapper>
     {
+        /// <summary>
+        ///     Register all dependencies for current injector
+        /// </summary>
+        /// <param name="container">Instance of Unity container</param>
         protected internal override void RegisterTypes(IUnityContainer container)
         {
             container.RegisterType<IRepository<User>, Repository<User>>();

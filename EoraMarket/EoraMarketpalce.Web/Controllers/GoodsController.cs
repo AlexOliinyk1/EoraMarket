@@ -183,7 +183,7 @@ namespace EoraMarketpalce.Web.Controllers
         [HttpGet]
         [Route("api/Stat/GetNames")]
         public List<string> GetStatsNames([FromUri]string searchstring)
-       {
+        {
             return _statService.GetStatsNames(searchstring).Take(10).ToList();
         }
     }

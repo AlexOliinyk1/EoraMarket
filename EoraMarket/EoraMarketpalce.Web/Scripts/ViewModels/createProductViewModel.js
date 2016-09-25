@@ -12,9 +12,6 @@
             typeId: ko.observable(""),
             classes: ko.observableArray([]),
             stats: ko.observableArray([])
-        },
-        validate: function () {
-            this.product
         }
     };
 

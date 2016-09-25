@@ -9,14 +9,27 @@ using EoraMarketplace.Services.Email;
 
 namespace EoraMarketpalce.Web.Common.Identity
 {
+    /// <summary>
+    ///     Identity User manager
+    /// </summary>
     public class EoraUserManager : UserManager<User, int>
     {
+        /// <summary>
+        ///     Ctor.
+        /// </summary>
+        /// <param name="store"></param>
         public EoraUserManager(IUserStore<User, int> store)
             : base(store)
         {
             this.Store = store;
         }
 
+        /// <summary>
+        ///     Create instance of EoraUserManager
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public static EoraUserManager Create(IdentityFactoryOptions<EoraUserManager> options, IOwinContext context)
         {
             var manager = new EoraUserManager(DependencyResolver.Current.GetService<IUserStore<User, int>>());

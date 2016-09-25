@@ -43,7 +43,7 @@ namespace EoraMarketpalce.Web
                 }
             });
 
-            PublicClientId = "self";
+            PublicClientId = "04c068a5-b746-49e6-a1b0-b9812e2052c9";
             OAuthOptions = new OAuthAuthorizationServerOptions {
                 TokenEndpointPath = new PathString("/Token"),
                 Provider = new ApplicationOAuthProvider(PublicClientId),
