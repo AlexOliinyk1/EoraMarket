@@ -221,6 +221,7 @@
     <Compile Include="Common\Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Controllers\Base\AppController.cs" />
     <Compile Include="Controllers\CharacterController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\GoodsController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
@@ -431,6 +432,9 @@
     <Content Include="Views\SignIn\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Character\View.cshtml" />
     <Content Include="Views\Character\Edit.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\ServerError.cshtml" />
+    <Content Include="Views\Error\Forbidden.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

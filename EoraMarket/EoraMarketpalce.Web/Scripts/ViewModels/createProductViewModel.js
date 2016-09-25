@@ -84,6 +84,12 @@
         reader.readAsDataURL(file);
     };
 
+    self.statsHandle = function (term, callback) {
+        $.get("../api/Stat/GetNames", { searchstring: term }).success(function (result) {
+            callback(result);
+        });
+    }
+
     self.init = function () {
         $.get("/api/Class/Get").success(function (result) {
             console.log(result);
@@ -99,10 +105,6 @@
 
         self.model.product.name;
     };
-
-    function validateProduct() {
-
-    }
 
     function getSelectedClasses() {
         var classesModels = self.model.product.classes();

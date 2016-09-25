@@ -9,14 +9,17 @@ namespace EoraMarketplace.Services.Stats
     public class StatsService : IStatsService
     {
         private readonly IRepository<Product> _productRepository;
+        private readonly IRepository<ProductStat> _statRepository;
 
         /// <summary>
         ///     Ctor.
         /// </summary>
+        /// <param name="productRepository"></param>
         /// <param name="statsRepository"></param>
-        public StatsService(IRepository<Product> productRepository)
+        public StatsService(IRepository<Product> productRepository, IRepository<ProductStat> statRepository)
         {
             this._productRepository = productRepository;
+            this._statRepository = statRepository;
         }
 
         public List<ProductStat> GetStatsByProduct(int id)
@@ -28,9 +31,12 @@ namespace EoraMarketplace.Services.Stats
             return stats;
         }
 
-        public List<string> GetStatsNames(int id)
+        public List<string> GetStatsNames(string namePart)
         {
-            return null;
+            return _statRepository.Table.Where(x => x.StatName.Contains(namePart))
+                .Select(x => x.StatName)
+                .Distinct()
+                .ToList();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using EoraMarketpalce.Web.Common.Constants;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -64,15 +65,19 @@ namespace EoraMarketpalce.Web.Common
 
         public string SaveImage(string base64data)
         {
-            Image image = ReadImage(base64data);
-
             string imagePath = Path.Combine(_imageRootPath, GetUniqueName());
 
-            var rel = ToVirtualPath(imagePath);
+            base64data = base64data.Split(',')[1];
 
             try
             {
-                image.Save(imagePath, image.RawFormat);
+                byte[] bytes = Convert.FromBase64String(base64data);
+
+                using(FileStream imageFile = new FileStream(imagePath, FileMode.Create))
+                {
+                    imageFile.Write(bytes, 0, bytes.Length);
+                    imageFile.Flush();
+                }
             }
             catch(Exception exc)
             {
@@ -85,19 +90,6 @@ namespace EoraMarketpalce.Web.Common
         private string GetUniqueName()
         {
             return string.Format("product-{0}.png", DateTime.Now.Ticks);
-        }
-
-        private Image ReadImage(string data)
-        {
-            data = data.Split(',')[1];
-
-            byte[] bytes = Convert.FromBase64String(data);
-            Image image;
-            using(MemoryStream ms = new MemoryStream(bytes))
-            {
-                image = Image.FromStream(ms);
-            }
-            return image;
         }
     }
 }

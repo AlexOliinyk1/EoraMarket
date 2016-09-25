@@ -5,6 +5,7 @@ using EoraMarketplace.Data.Domain.Characters;
 using EoraMarketplace.Data.Domain.Goods;
 using EoraMarketplace.Services.Characters;
 using EoraMarketplace.Services.Goods;
+using EoraMarketplace.Services.Stats;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -20,16 +21,19 @@ namespace EoraMarketpalce.Web.Controllers
     {
         private readonly ICharacterService _service;
         private readonly IGoodsService _goodsService;
+        private readonly IStatsService _statService;
 
         /// <summary>
         ///     Ctor.
         /// </summary>
         /// <param name="service"></param>
         /// <param name="goodsService"></param>
-        public GoodsController(ICharacterService service, IGoodsService goodsService)
+        /// <param name="statService"></param>
+        public GoodsController(ICharacterService service, IGoodsService goodsService, IStatsService statService)
         {
             this._service = service;
             this._goodsService = goodsService;
+            this._statService = statService;
         }
 
         [HttpGet]
@@ -174,6 +178,13 @@ namespace EoraMarketpalce.Web.Controllers
         public List<Class> GetClasses()
         {
             return _service.GetCharactersClasses();
+        }
+
+        [HttpGet]
+        [Route("api/Stat/GetNames")]
+        public List<string> GetStatsNames([FromUri]string searchstring)
+       {
+            return _statService.GetStatsNames(searchstring).Take(10).ToList();
         }
     }
 }
