@@ -16,6 +16,7 @@ using EoraMarketpalce.Web.Models.Goods;
 using EoraMarketplace.Services.Stats;
 using System.Net;
 using System.Collections;
+using EoraMarketpalce.Web.Common;
 
 namespace EoraMarketpalce.Web.Controllers
 {
@@ -138,7 +139,7 @@ namespace EoraMarketpalce.Web.Controllers
                 .Select(x => new InventoryProductModel {
                     Id = x.Id,
                     ProductId = x.Product.Id,
-                    ImageUrl = x.Product.Image.ImageUrl,
+                    ImageUrl = ImageManager.UrlToHtmlValid(x.Product.Image.ImageUrl),
                     Name = x.Product.Name,
                     Price = x.Product.Price,
                     SellPrice = x.Product.SellPrice,

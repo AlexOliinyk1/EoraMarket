@@ -74,7 +74,7 @@ namespace EoraMarketplace.Services.Goods
 
         public MarketProduct GetProductDetail(int productId)
         {
-            return _goodsRepository.Table.Where(x => x.Id == productId)
+            return _goodsRepository.Table.Where(x => x.ProductId == productId)
                  .Include(x => x.Product)
                  .Include(x => x.Product.Image)
                  .Include(x => x.Product.Classes)
@@ -88,7 +88,7 @@ namespace EoraMarketplace.Services.Goods
                 .Select(x => x.Product.Name)
                 .ToList();
         }
-        
+
         public int GetGoodsCount(Class forClass, string searchName, int? minPrice, int? maxPrice)
         {
             return GetFilteredQuery(forClass, searchName, minPrice, maxPrice).Count();
