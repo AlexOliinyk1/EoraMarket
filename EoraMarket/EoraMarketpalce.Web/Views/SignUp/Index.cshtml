@@ -3,11 +3,14 @@
     ViewBag.Title = "Sign up";
 }
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
 
         @using(Html.BeginForm("", "SignUp", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
             @Html.AntiForgeryToken()
+            <h4>Register new account.</h4>
+            <hr />
             @Html.ValidationSummary("", new { @class = "text-danger" })
             <div class="form-group">
                 @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
@@ -35,4 +38,5 @@
         }
 
     </div>
+    <div class="col-md-3"></div>
 </div>
